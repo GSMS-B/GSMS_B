@@ -846,47 +846,46 @@ document.addEventListener('DOMContentLoaded', () => {
             'contrasignal': {
                 titleStart: 'Contra', titleEnd: 'Signal',
                 tagline: '// Market Sentiment Analysis Engine',
-                desc: `<p>"When negative news breaks, stock prices crash. But is it a disaster or a discount? "</p>
-                       <p class="mt-4">ContraSignal autonomously scrapes global news feeds, processing sentiment through LLMs to identify overreactions in real-time. It visualizes the delta between market perception and fundamental reality.</p>`,
-                tech: ['Python', 'FastAPI', 'LangChain', 'ChromaDB', 'React'],
-                url: 'localhost:8000/dashboard',
+                desc: `<p>"When negative news breaks, stock prices crash. But is it a disaster or a discount?"</p>
+                       <p class="mt-4">AI multi-agent system for stock analysis that delivers insights in 60 seconds. Autonomously scrapes global news to identify overreactions in real-time.</p>`,
+                tech: ['Python', 'FastAPI', 'Google Gemini', 'LangChain', 'ChromaDB'],
+                url: 'gsms-b-contra-signal.hf.space',
                 live: 'https://gsms-b-contra-signal.hf.space/',
-                code: 'https://github.com/GSMS-B/GSMS_B',
-                // Live Iframe
+                code: 'https://github.com/GSMS-B/Contra-Signal.git',
                 media: `<iframe src="https://gsms-b-contra-signal.hf.space/" title="ContraSignal" class="w-full h-full border-0 bg-white dark:bg-black"></iframe>`
             },
             'projectqr': {
                 titleStart: 'Project', titleEnd: 'QR',
-                tagline: '// Dynamic Link Management',
+                tagline: '// Dynamic QR Code Management',
                 desc: `<p>Static QR codes are dead. ProjectQR introduces a dynamic layer, allowing you to change destination URLs instantly without reprinting.</p>
-                       <p class="mt-4">Featuring real-time scan analytics, geolocation tracking, and expiration management. Built for enterprise scalability.</p>`,
-                tech: ['FastAPI', 'PostgreSQL', 'Chart.js', 'Redis'],
+                       <p class="mt-4">Dynamic QR code management platform with real-time scanning analytics, geolocation tracking, and expiration management.</p>`,
+                tech: ['FastAPI', 'PostgreSQL', 'JavaScript', 'Chart.js'],
                 url: 'projectqr.onrender.com',
                 live: 'https://projectqr.onrender.com',
-                code: '#',
-                media: `<div class="w-full h-full flex flex-col items-center justify-center bg-gray-50 dark:bg-[#050505] p-8 text-center"><span class="material-icons text-6xl text-gray-800 mb-4">qr_code_2</span><h3 class="font-display text-2xl text-black">QR Analytics Dashboard</h3><p class="text-xs font-mono text-gray-600 mt-2">Visualization Module Loading...</p></div>`
+                code: 'https://github.com/GSMS-B/ProjectQR.git',
+                media: `<iframe src="https://projectqr.onrender.com" title="ProjectQR" class="w-full h-full border-0 bg-white dark:bg-black"></iframe>`
             },
-            'peeranalyst': {
-                titleStart: 'Peer', titleEnd: 'Analyst',
-                tagline: '// Competitive Benchmarking',
-                desc: `<p>Stop manually comparing 10Ks. PeerAnalyst ingests financial statements to generate automated peer comparison matrices.</p>
-                       <p class="mt-4">Visualize EBITDA margins, revenue growth, and debt ratios against industry averages instantly.</p>`,
-                tech: ['Python', 'Pandas', 'Plotly', 'FMP API'],
-                url: 'data.pipeline/peer-analysis',
-                live: '#',
-                code: '#',
-                media: `<div class="w-full h-full flex flex-col items-center justify-center bg-gray-50 dark:bg-[#050505] p-8 text-center"><span class="material-icons text-6xl text-gray-800 mb-4">bar_chart</span><h3 class="font-display text-2xl text-black">Market Position Matrix</h3></div>`
+            'quantumleap': {
+                titleStart: 'Quantum', titleEnd: 'Leap',
+                tagline: '// Quantum-Inspired Portfolio Optimizer',
+                desc: `<p>Traditional optimization hits limits. QuantumLeap breaks them using the QAOA algorithm for superior asset allocation.</p>
+                       <p class="mt-4">Portfolio optimizer utilizing quantum algorithms to maximize Sharpe ratios and minimize risk across complex asset baskets.</p>`,
+                tech: ['Python', 'Quantum Algorithms (QAOA)', 'Financial APIs'],
+                url: 'quantumleap-optimizer.onrender.com',
+                live: 'https://quantumleap-optimizer.onrender.com/',
+                code: 'https://github.com/GSMS-B/QuantumLeap-Portfolio-Optimizer.git',
+                media: `<iframe src="https://quantumleap-optimizer.onrender.com/" title="QuantumLeap" class="w-full h-full border-0 bg-white dark:bg-black"></iframe>`
             },
             'hush': {
                 titleStart: 'Hush', titleEnd: '.io',
                 tagline: '// Zero-Knowledge Messaging',
                 desc: `<p>Privacy is not a feature, it's the foundation. Hush.io ensures your messages are encrypted in transit and deleted on receipt.</p>
-                       <p class="mt-4">No database. No logs. No trace. Pure ephemeral communication powered by WebSockets.</p>`,
-                tech: ['WebSockets', 'Crypto', 'Node.js', 'Redis'],
-                url: 'hush.io/secure-channel',
+                       <p class="mt-4">Private ephemeral messaging app ensuring complete anonymity with zero database storage. No logs, no trace.</p>`,
+                tech: ['WebSockets', 'E2E Encryption', 'Zero-storage Architecture'],
+                url: 'hush-io-chgx.onrender.com',
                 live: 'https://hush-io-chgx.onrender.com/',
-                code: '#',
-                media: `<div class="w-full h-full flex flex-col items-center justify-center bg-gray-50 dark:bg-[#050505] p-8 text-center"><span class="material-icons text-6xl text-gray-800 mb-4">lock</span><h3 class="font-display text-2xl text-black">End-to-End Encrypted Details</h3></div>`
+                code: 'https://github.com/GSMS-B/Hush.io.git',
+                media: `<iframe src="https://hush-io-chgx.onrender.com/" title="Hush.io" class="w-full h-full border-0 bg-white dark:bg-black"></iframe>`
             }
         };
 
