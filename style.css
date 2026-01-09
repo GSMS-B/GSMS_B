@@ -977,139 +977,209 @@ h6 {
 }
 
 /* ============================================
-   9. HERO SECTION (HOME)
-   Text-behind-image effect with animations
+   9. HERO SECTION (HOME) - REDESIGNED
+   DEVELOPER text behind portrait, vertical GSMS-B
    ============================================ */
-.hero {
-    position: relative;
-    width: 100%;
-    max-width: 1400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding-top: var(--spacing-xl);
+
+/* Hero Section Overrides */
+.section--home {
+    padding: 0;
+    background: var(--primary);
 }
 
-/* Large Background Text */
-.hero__bg-text {
+/* Texture Overlay */
+.hero-texture {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Vertical GSMS-B Letters (Left Side) */
+.hero-vertical-text {
+    position: absolute;
+    left: 3rem;
+    bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-heading);
+    font-size: clamp(6rem, 12vh, 10rem);
+    font-weight: 900;
+    line-height: 0.8;
+    color: rgba(0, 0, 0, 0.2);
+    mix-blend-mode: overlay;
+    z-index: 2;
+    user-select: none;
+}
+
+.hero-vertical-text span {
+    display: block;
+}
+
+/* Main Hero Container */
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1600px;
+    margin: 0 auto;
+    z-index: 5;
+}
+
+/* Large DEVELOPER Text (Behind Image) */
+.hero-developer-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
-    gap: 0.02em;
-    z-index: var(--z-bg);
-    pointer-events: none;
-    white-space: nowrap;
-}
-
-.hero__bg-letter {
     font-family: var(--font-heading);
-    font-size: var(--fs-hero-bg);
+    font-size: clamp(8rem, 25vw, 20rem);
     font-weight: 900;
-    color: rgba(var(--secondary-rgb), 0.15);
     text-transform: uppercase;
-    line-height: 1;
-    display: inline-block;
-}
-
-/* Hero Image */
-.hero__image-wrapper {
-    position: relative;
-    z-index: var(--z-default);
-    margin-bottom: var(--spacing-lg);
-}
-
-.hero__image {
-    max-width: 500px;
-    width: 80vw;
-    height: auto;
-    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.3));
-    transition: transform var(--transition-slow);
-}
-
-.hero__image:hover {
-    transform: scale(1.02);
-}
-
-/* Placeholder style when no image */
-.hero__image[src="assets/hero-image.png"]:not([src*="data:"]) {
-    min-height: 400px;
-    background: linear-gradient(135deg, rgba(var(--secondary-rgb), 0.1) 0%, rgba(var(--secondary-rgb), 0.2) 100%);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Name with Styled Initials */
-.hero__name {
-    font-family: var(--font-heading);
-    font-size: clamp(1.5rem, 4vw, 3rem);
-    font-weight: 700;
-    color: var(--secondary);
-    margin-bottom: var(--spacing-md);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.3em;
-}
-
-.hero__name-part {
-    display: inline-block;
-}
-
-.initial {
-    color: var(--primary);
-    -webkit-text-stroke: 1px var(--secondary);
-    text-shadow: 2px 2px 0 var(--secondary);
-    font-size: 1.2em;
-}
-
-/* Tagline */
-.hero__tagline {
-    font-family: var(--font-body);
-    font-size: clamp(1rem, 2vw, 1.5rem);
-    color: var(--secondary);
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    color: transparent;
+    -webkit-text-stroke: 3px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    user-select: none;
+    z-index: 10;
     opacity: 0.9;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.3em;
 }
 
-.tagline-word {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-/* Scroll Indicator */
-.scroll-indicator {
+/* Portrait Image Container */
+.hero-portrait {
     position: absolute;
-    bottom: var(--spacing-lg);
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+    height: 85vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.hero-portrait__image {
+    height: 100%;
+    width: auto;
+    max-width: 90vw;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(100%) contrast(1.25) brightness(1.1);
+    mix-blend-mode: multiply;
+}
+
+/* Tech Icons (Right Side) */
+.hero-tech-icons {
+    position: absolute;
+    top: 50%;
+    right: 3rem;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    z-index: 2;
+}
+
+.hero-tech-icons svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+}
+
+/* Scroll Indicator (Right Side) */
+.hero-scroll-indicator {
+    position: absolute;
+    right: 3rem;
+    bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-xs);
-    color: var(--secondary);
-    opacity: 0.7;
-    animation: bounce 2s ease infinite;
+    gap: 1rem;
+    z-index: 30;
 }
 
-.scroll-indicator__text {
-    font-size: var(--fs-small);
+.hero-scroll-indicator__text {
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.8);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
 }
 
-.scroll-indicator__arrow {
-    width: 24px;
-    height: 24px;
+.hero-scroll-indicator__line {
+    width: 1px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-scroll-indicator__dot {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 50%;
+    background: white;
+    animation: scrollDown 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollDown {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(200%);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .hero-vertical-text {
+        left: 1.5rem;
+        bottom: 1.5rem;
+        font-size: clamp(4rem, 10vh, 7rem);
+    }
+
+    .hero-tech-icons {
+        display: none;
+    }
+
+    .hero-scroll-indicator {
+        right: 1.5rem;
+        bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-vertical-text {
+        display: none;
+    }
+
+    .hero-developer-text {
+        font-size: clamp(4rem, 18vw, 8rem);
+        -webkit-text-stroke: 2px rgba(255, 255, 255, 0.8);
+    }
+
+    .hero-portrait {
+        height: 70vh;
+    }
+
+    .hero-scroll-indicator {
+        right: 1rem;
+        bottom: 1rem;
+    }
 }
 
 /* ============================================
