@@ -1735,7 +1735,8 @@ h6 {
 .contact-marquee__track {
     display: flex;
     white-space: nowrap;
-    animation: marqueeScroll 30s linear infinite;
+    animation: marqueeScroll 20s linear infinite;
+    width: max-content;
 }
 
 .contact-marquee__text {
@@ -1744,7 +1745,8 @@ h6 {
     color: white;
     text-transform: uppercase;
     line-height: 1;
-    padding-right: 2rem;
+    padding-right: 3rem;
+    flex-shrink: 0;
 }
 
 @keyframes marqueeScroll {
