@@ -753,29 +753,64 @@ document.addEventListener('DOMContentLoaded', () => {
        12b. AUDIO VIBE CONTROL
        Control background music from header
        ============================================ */
-    function initVibeControl() {
+    /* ============================================
+       12b. AUDIO SYSTEM (Vibe Control + Nav Toggle)
+       Unified audio control with persistence
+       ============================================ */
+    function initAudioSystem() {
         const audio = document.getElementById('bg-music');
-        const control = document.getElementById('audio-control');
+        const headerControl = document.getElementById('audio-control');
+        const navToggle = document.getElementById('audio-toggle');
 
-        if (!audio || !control) return;
+        if (!audio) return;
 
-        // Set volume
+        // --- Persistence: Restore State ---
+        const savedTime = sessionStorage.getItem('audio_currentTime');
+        const wasPlaying = sessionStorage.getItem('audio_isPlaying') === 'true';
+
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
         audio.volume = 0.4;
 
-        control.addEventListener('click', () => {
+        if (wasPlaying) {
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    updateUI(true);
+                }).catch(e => console.log('Autoplay blocked:', e));
+            }
+        }
+
+        // --- UI Update Helper ---
+        function updateUI(isPlaying) {
+            if (headerControl) headerControl.classList.toggle('playing', isPlaying);
+            if (navToggle) navToggle.classList.toggle('playing', isPlaying);
+        }
+
+        // --- Toggle Logic ---
+        function toggleAudio() {
             if (audio.paused) {
-                const playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        control.classList.add('playing');
-                    }).catch(error => {
-                        console.error("Audio play failed:", error);
-                    });
-                }
+                audio.play().then(() => {
+                    updateUI(true);
+                    sessionStorage.setItem('audio_isPlaying', 'true');
+                }).catch(e => console.error("Audio play failed:", e));
             } else {
                 audio.pause();
-                control.classList.remove('playing');
+                updateUI(false);
+                sessionStorage.setItem('audio_isPlaying', 'false');
             }
+        }
+
+        // --- Event Listeners ---
+        if (headerControl) headerControl.addEventListener('click', toggleAudio);
+        if (navToggle) navToggle.addEventListener('click', toggleAudio);
+
+        // Save state before leaving page (for seamless transition)
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('audio_currentTime', audio.currentTime);
+            sessionStorage.setItem('audio_isPlaying', !audio.paused);
         });
     }
 
@@ -792,8 +827,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initCarousel();
         initMonitorParallax();
         initParticles();
-        // initAudioToggle(); // Deprecated or replaced
-        initVibeControl();
+        initAudioSystem(); // Unified audio system
         initCounters();
 
         // Log initialization success

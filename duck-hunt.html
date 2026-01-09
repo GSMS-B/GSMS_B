@@ -435,9 +435,33 @@
     </a>
 
     <!-- Background Audio (same as main page) -->
-    <audio id="ambient-audio" loop autoplay>
+    <audio id="bg-music" loop>
         <source src="assets/Six days.mpeg" type="audio/mpeg">
     </audio>
+
+    <script>
+        // Audio Persistence Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('bg-music');
+            if (!audio) return;
+
+            // Restore state
+            const savedTime = sessionStorage.getItem('audio_currentTime');
+            const wasPlaying = sessionStorage.getItem('audio_isPlaying') === 'true';
+
+            if (savedTime) audio.currentTime = parseFloat(savedTime);
+
+            if (wasPlaying) {
+                audio.play().catch(e => console.log('Autoplay blocked:', e));
+            }
+
+            // Save state on unload
+            window.addEventListener('beforeunload', () => {
+                sessionStorage.setItem('audio_currentTime', audio.currentTime);
+                sessionStorage.setItem('audio_isPlaying', !audio.paused);
+            });
+        });
+    </script>
 
     <!-- Score Panel -->
     <div class="score-panel">
