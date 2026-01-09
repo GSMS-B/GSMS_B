@@ -750,6 +750,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================================
+       12b. AUDIO VIBE CONTROL
+       Control background music from header
+       ============================================ */
+    function initVibeControl() {
+        const audio = document.getElementById('bg-music');
+        const control = document.getElementById('audio-control');
+
+        if (!audio || !control) return;
+
+        // Set volume
+        audio.volume = 0.4;
+
+        control.addEventListener('click', () => {
+            if (audio.paused) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        control.classList.add('playing');
+                    }).catch(error => {
+                        console.error("Audio play failed:", error);
+                    });
+                }
+            } else {
+                audio.pause();
+                control.classList.remove('playing');
+            }
+        });
+    }
+
+    /* ============================================
        13. INITIALIZATION
        Start all modules
        ============================================ */
@@ -762,7 +792,8 @@ document.addEventListener('DOMContentLoaded', () => {
         initCarousel();
         initMonitorParallax();
         initParticles();
-        initAudioToggle();
+        // initAudioToggle(); // Deprecated or replaced
+        initVibeControl();
         initCounters();
 
         // Log initialization success

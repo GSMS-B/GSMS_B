@@ -473,6 +473,126 @@ h6 {
     transform: translateY(-3px);
 }
 
+/* Audio Vibe Control */
+.audio-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-right: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+}
+
+.audio-control:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.audio-control__icon {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 16px;
+    width: 20px;
+}
+
+.audio-control__wave {
+    width: 3px;
+    background: white;
+    border-radius: 2px;
+    height: 30%;
+    animation: none;
+    transition: height 0.2s ease;
+}
+
+/* Wave Animation (Active State) */
+.audio-control.playing .audio-control__wave {
+    animation: waveBounce 1s infinite ease-in-out;
+}
+
+.audio-control.playing .audio-control__wave:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.audio-control.playing .audio-control__wave:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.audio-control.playing .audio-control__wave:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes waveBounce {
+
+    0%,
+    100% {
+        height: 30%;
+    }
+
+    50% {
+        height: 100%;
+    }
+}
+
+.audio-control__info {
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+}
+
+.audio-control__label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2px;
+}
+
+.audio-control__track {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    height: 16px;
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+
+.audio-control__ticker {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    width: max-content;
+}
+
+.audio-control.playing .audio-control__ticker {
+    animation: tickerText 10s linear infinite;
+}
+
+@keyframes tickerText {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Hide on mobile/tablet to save space */
+@media (max-width: 1024px) {
+    .audio-control {
+        display: none;
+    }
+}
+
 /* Hamburger Menu Button */
 .hamburger {
     width: 40px;
