@@ -1008,8 +1008,7 @@ h6 {
     font-size: clamp(6rem, 12vh, 10rem);
     font-weight: 900;
     line-height: 0.8;
-    color: rgba(0, 0, 0, 0.2);
-    mix-blend-mode: overlay;
+    color: rgba(0, 0, 0, 0.35);
     z-index: 2;
     user-select: none;
 }
