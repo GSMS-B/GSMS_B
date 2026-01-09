@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duck Hunt | GSMS-B</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #F6383F;
+            --primary-dark: #D63031;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Custom Crosshair Cursor */
+        .game-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            cursor: crosshair;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Custom Gun Cursor */
+        .game-container.playing {
+            cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="none" stroke="%23F6383F" stroke-width="2"/><line x1="16" y1="0" x2="16" y2="10" stroke="%23F6383F" stroke-width="2"/><line x1="16" y1="22" x2="16" y2="32" stroke="%23F6383F" stroke-width="2"/><line x1="0" y1="16" x2="10" y2="16" stroke="%23F6383F" stroke-width="2"/><line x1="22" y1="16" x2="32" y2="16" stroke="%23F6383F" stroke-width="2"/><circle cx="16" cy="16" r="3" fill="%23F6383F"/></svg>') 16 16, crosshair;
+        }
+
+        /* Sky Gradient */
+        .sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 65%;
+            background: linear-gradient(to bottom,
+                    #87CEEB 0%,
+                    #B0E0E6 50%,
+                    #E0F7FA 100%);
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: floatCloud 20s ease-in-out infinite;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cloud:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .cloud:nth-child(2) {
+            top: 20%;
+            left: 40%;
+            font-size: 3rem;
+            animation-delay: -5s;
+        }
+
+        .cloud:nth-child(3) {
+            top: 8%;
+            right: 15%;
+            font-size: 5rem;
+            animation-delay: -10s;
+        }
+
+        .cloud:nth-child(4) {
+            top: 25%;
+            right: 30%;
+            font-size: 2.5rem;
+            animation-delay: -15s;
+        }
+
+        @keyframes floatCloud {
+
+            0%,
+            100% {
+                transform: translateX(0) translateY(0);
+            }
+
+            50% {
+                transform: translateX(30px) translateY(-10px);
+            }
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 50px;
+            right: 80px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #FFE066 0%, #FFA500 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 60px rgba(255, 200, 0, 0.5);
+        }
+
+        /* Ground */
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 35%;
+        }
+
+        .grass {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to bottom,
+                    #228B22 0%,
+                    #1a6b1a 30%,
+                    #145214 100%);
+        }
+
+        .grass::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 10px,
+                    #228B22 10px,
+                    #228B22 12px);
+        }
+
+        .dirt {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to bottom,
+                    #8B6914 0%,
+                    #5D4E37 100%);
+        }
+
+        /* Trees */
+        .trees {
+            position: absolute;
+            bottom: calc(35% - 10px);
+            left: 0;
+            right: 0;
+            height: 150px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            padding: 0 5%;
+            pointer-events: none;
+        }
+
+        .tree {
+            font-size: 6rem;
+            opacity: 0.9;
+        }
+
+        /* Duck */
+        .duck {
+            position: absolute;
+            font-size: 4rem;
+            cursor: crosshair;
+            transition: transform 0.1s;
+            z-index: 10;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .duck.shot {
+            animation: duckFall 0.8s ease-in forwards;
+        }
+
+        @keyframes duckFall {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(180deg) translateY(100px);
+            }
+
+            100% {
+                transform: rotate(360deg) translateY(500px);
+                opacity: 0;
+            }
+        }
+
+        /* Score Panel */
+        .score-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            z-index: 100;
+            min-width: 200px;
+            border: 2px solid var(--primary);
+        }
+
+        .score-panel h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .score-item span:first-child {
+            color: #888;
+        }
+
+        .score-item span:last-child {
+            font-weight: bold;
+            color: white;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        /* Home Button */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-family: 'Anton', sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 100;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .home-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Start Screen */
+        .start-screen {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            color: white;
+        }
+
+        .start-screen.hidden {
+            display: none;
+        }
+
+        .start-screen h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(3rem, 10vw, 8rem);
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .start-screen p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #888;
+        }
+
+        .start-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-family: 'Anton', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .start-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Game Over Screen */
+        .game-over {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            color: white;
+        }
+
+        .game-over.hidden {
+            display: none;
+        }
+
+        .game-over h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(2rem, 8vw, 5rem);
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .game-over .final-score {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        /* Muzzle Flash */
+        .muzzle-flash {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, rgba(255, 255, 0, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 50;
+            animation: flash 0.1s ease-out forwards;
+        }
+
+        @keyframes flash {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Shot counter bullets */
+        .shots-display {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .bullet {
+            width: 10px;
+            height: 20px;
+            background: linear-gradient(to bottom, #FFD700 0%, #B8860B 100%);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .bullet.used {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Start Screen -->
+    <div class="start-screen" id="start-screen">
+        <h1>Duck Hunt</h1>
+        <p>Click on ducks to shoot them. Get the highest score!</p>
+        <button class="start-btn" onclick="startGame()">Start Game</button>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div class="game-over hidden" id="game-over">
+        <h1>Game Over!</h1>
+        <p class="final-score">Score: <span id="final-score">0</span></p>
+        <button class="start-btn" onclick="startGame()">Play Again</button>
+    </div>
+
+    <!-- Home Button -->
+    <a href="index.html" class="home-btn">
+        ← Back
+    </a>
+
+    <!-- Score Panel -->
+    <div class="score-panel">
+        <h2>Duck Hunt</h2>
+        <div class="score-value" id="score">0</div>
+        <div class="score-item">
+            <span>Ducks Hit:</span>
+            <span id="ducks-hit">0</span>
+        </div>
+        <div class="score-item">
+            <span>Shots Fired:</span>
+            <span id="shots-fired">0</span>
+        </div>
+        <div class="score-item">
+            <span>Accuracy:</span>
+            <span id="accuracy">0%</span>
+        </div>
+        <div class="score-item">
+            <span>Time Left:</span>
+            <span id="timer">60s</span>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="game-container" id="game-container">
+        <!-- Sky -->
+        <div class="sky">
+            <div class="cloud">☁️</div>
+            <div class="cloud">☁️</div>
+            <div class="cloud">☁️</div>
+            <div class="cloud">☁️</div>
+            <div class="sun"></div>
+        </div>
+
+        <!-- Ground -->
+        <div class="ground">
+            <div class="grass"></div>
+            <div class="dirt"></div>
+        </div>
+
+        <!-- Trees -->
+        <div class="trees">
+            <span class="tree">🌲</span>
+            <span class="tree">🌳</span>
+            <span class="tree">🌲</span>
+            <span class="tree">🌳</span>
+            <span class="tree">🌲</span>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        let score = 0;
+        let ducksHit = 0;
+        let shotsFired = 0;
+        let timeLeft = 60;
+        let gameRunning = false;
+        let timerInterval;
+        let duckSpawnInterval;
+
+        const gameContainer = document.getElementById('game-container');
+        const scoreDisplay = document.getElementById('score');
+        const ducksHitDisplay = document.getElementById('ducks-hit');
+        const shotsFiredDisplay = document.getElementById('shots-fired');
+        const accuracyDisplay = document.getElementById('accuracy');
+        const timerDisplay = document.getElementById('timer');
+        const startScreen = document.getElementById('start-screen');
+        const gameOverScreen = document.getElementById('game-over');
+        const finalScoreDisplay = document.getElementById('final-score');
+
+        // Duck emojis for variety
+        const duckTypes = ['🦆', '🦆', '🦆', '🐦', '🦅'];
+
+        function startGame() {
+            // Reset state
+            score = 0;
+            ducksHit = 0;
+            shotsFired = 0;
+            timeLeft = 60;
+            gameRunning = true;
+
+            // Update UI
+            updateDisplay();
+            startScreen.classList.add('hidden');
+            gameOverScreen.classList.add('hidden');
+            gameContainer.classList.add('playing');
+
+            // Remove any existing ducks
+            document.querySelectorAll('.duck').forEach(d => d.remove());
+
+            // Start timer
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = timeLeft + 's';
+
+                if (timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+
+            // Spawn ducks
+            spawnDuck();
+            duckSpawnInterval = setInterval(spawnDuck, 2000);
+        }
+
+        function endGame() {
+            gameRunning = false;
+            gameContainer.classList.remove('playing');
+            clearInterval(timerInterval);
+            clearInterval(duckSpawnInterval);
+
+            // Remove all ducks
+            document.querySelectorAll('.duck').forEach(d => d.remove());
+
+            // Show game over
+            finalScoreDisplay.textContent = score;
+            gameOverScreen.classList.remove('hidden');
+        }
+
+        function spawnDuck() {
+            if (!gameRunning) return;
+
+            const duck = document.createElement('div');
+            duck.className = 'duck';
+            duck.textContent = duckTypes[Math.floor(Math.random() * duckTypes.length)];
+
+            // Random starting position (left or right edge)
+            const fromLeft = Math.random() > 0.5;
+            const startX = fromLeft ? -100 : window.innerWidth + 100;
+            const startY = 50 + Math.random() * (window.innerHeight * 0.4);
+
+            duck.style.left = startX + 'px';
+            duck.style.top = startY + 'px';
+            duck.style.transform = fromLeft ? 'scaleX(1)' : 'scaleX(-1)';
+
+            // Click handler
+            duck.addEventListener('click', (e) => {
+                if (duck.classList.contains('shot')) return;
+
+                e.stopPropagation();
+                duck.classList.add('shot');
+
+                ducksHit++;
+                score += 100;
+                updateDisplay();
+
+                // Remove after animation
+                setTimeout(() => duck.remove(), 800);
+            });
+
+            gameContainer.appendChild(duck);
+
+            // Animate duck flight
+            const endX = fromLeft ? window.innerWidth + 100 : -100;
+            const duration = 3000 + Math.random() * 3000;
+            const amplitude = 30 + Math.random() * 50;
+
+            let startTime = null;
+
+            function animateDuck(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = (timestamp - startTime) / duration;
+
+                if (progress >= 1 || duck.classList.contains('shot')) {
+                    if (!duck.classList.contains('shot')) {
+                        duck.remove();
+                    }
+                    return;
+                }
+
+                const currentX = startX + (endX - startX) * progress;
+                const wave = Math.sin(progress * Math.PI * 4) * amplitude;
+
+                duck.style.left = currentX + 'px';
+                duck.style.top = (startY + wave) + 'px';
+
+                requestAnimationFrame(animateDuck);
+            }
+
+            requestAnimationFrame(animateDuck);
+        }
+
+        function updateDisplay() {
+            scoreDisplay.textContent = score;
+            ducksHitDisplay.textContent = ducksHit;
+            shotsFiredDisplay.textContent = shotsFired;
+
+            const accuracy = shotsFired > 0 ? Math.round((ducksHit / shotsFired) * 100) : 0;
+            accuracyDisplay.textContent = accuracy + '%';
+        }
+
+        // Click anywhere to shoot (with muzzle flash)
+        gameContainer.addEventListener('click', (e) => {
+            if (!gameRunning) return;
+
+            shotsFired++;
+            updateDisplay();
+
+            // Create muzzle flash
+            const flash = document.createElement('div');
+            flash.className = 'muzzle-flash';
+            flash.style.left = e.clientX + 'px';
+            flash.style.top = e.clientY + 'px';
+            document.body.appendChild(flash);
+
+            setTimeout(() => flash.remove(), 100);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- ============================================
+         GSMS-B Portfolio Website
+         A stunning, award-winning portfolio for
+         Ganasyam Mani Sankar Bugatha
+         ============================================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Ganasyam Mani Sankar Bugatha - Computer Science student building AI-powered products. AI handles the typing, I handle the thinking.">
+    <meta name="keywords" content="portfolio, developer, AI, machine learning, full-stack, computer science">
+    <meta name="author" content="Ganasyam Mani Sankar Bugatha">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="GSMS-B | AI-Powered Developer">
+    <meta property="og:description"
+        content="Building innovative AI products. AI handles the typing, I handle the thinking.">
+    <meta property="og:type" content="website">
+
+    <title>GSMS-B | AI-Powered Developer</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ============================================
+         LOADING SCREEN
+         Displays while page assets are loading
+         ============================================ -->
+    <div class="loader" id="loader">
+        <div class="loader__content">
+            <div class="loader__text">
+                <span class="loader__letter">G</span>
+                <span class="loader__letter">S</span>
+                <span class="loader__letter">M</span>
+                <span class="loader__letter">S</span>
+                <span class="loader__letter">-</span>
+                <span class="loader__letter">B</span>
+            </div>
+            <div class="loader__bar">
+                <div class="loader__progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         CUSTOM CURSOR
+         Enhanced cursor effect for desktop
+         ============================================ -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- ============================================
+         NAVIGATION
+         Hamburger menu with full-screen overlay
+         ============================================ -->
+    <header class="header" id="header">
+        <a href="#home" class="header__logo">
+            <span class="logo-letter logo-letter--red">G</span>
+            <span class="logo-letter logo-letter--red">S</span>
+            <span class="logo-letter logo-letter--red">M</span>
+            <span class="logo-letter logo-letter--red">S</span>
+            <span class="logo-letter">-</span>
+            <span class="logo-letter logo-letter--red">B</span>
+        </a>
+
+        <!-- Hamburger Menu Button -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+            <span class="hamburger__line"></span>
+        </button>
+    </header>
+
+    <!-- Full-Screen Navigation Overlay -->
+    <nav class="nav-overlay" id="nav-overlay">
+        <!-- Background Watermark -->
+        <div class="nav-overlay__watermark" aria-hidden="true">GSMS-B</div>
+
+        <!-- Dot Pattern Background -->
+        <div class="nav-overlay__pattern"></div>
+
+        <!-- Close Button (X) in header -->
+        <div class="nav-overlay__header">
+            <div class="nav-overlay__logo">GSMS-B</div>
+            <button class="nav-overlay__close" id="nav-close" aria-label="Close Menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Center: Menu Items -->
+        <div class="nav-overlay__menu">
+            <ul class="nav-overlay__list">
+                <li class="nav-overlay__item">
+                    <a href="#home" class="nav-overlay__link">
+                        <span class="nav-char">H</span><span class="nav-char">O</span><span
+                            class="nav-char">M</span><span class="nav-char">E</span>
+                    </a>
+                </li>
+                <li class="nav-overlay__item">
+                    <a href="#about" class="nav-overlay__link">
+                        <span class="nav-char">A</span><span class="nav-char">B</span><span
+                            class="nav-char">O</span><span class="nav-char">U</span><span class="nav-char">T</span>
+                    </a>
+                </li>
+                <li class="nav-overlay__item">
+                    <a href="#projects" class="nav-overlay__link">
+                        <span class="nav-char">P</span><span class="nav-char">R</span><span
+                            class="nav-char">O</span><span class="nav-char">J</span><span class="nav-char">E</span><span
+                            class="nav-char">C</span><span class="nav-char">T</span><span class="nav-char">S</span>
+                    </a>
+                </li>
+                <li class="nav-overlay__item">
+                    <a href="#contact" class="nav-overlay__link">
+                        <span class="nav-char">C</span><span class="nav-char">O</span><span
+                            class="nav-char">N</span><span class="nav-char">T</span><span class="nav-char">A</span><span
+                            class="nav-char">C</span><span class="nav-char">T</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Duck Hunt Mini Game Widget -->
+        <a href="duck-hunt.html" class="duck-hunt-widget" title="Play Duck Hunt!">
+            <div class="duck-hunt-widget__header">
+                <span>DUCK HUNT v1.0</span>
+                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+                    <path
+                        d="M21.58 16.09l-1.09-7.66C20.21 6.46 18.52 5 16.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66C2.2 17.63 3.39 19 4.94 19h0c.68 0 1.32-.27 1.8-.75L9 16h6l2.26 2.25c.48.48 1.13.75 1.8.75h0C20.61 19 21.8 17.63 21.58 16.09z" />
+                </svg>
+            </div>
+            <div class="duck-hunt-widget__game">
+                <!-- Sky -->
+                <div class="duck-hunt-widget__sky">
+                    <div class="duck-hunt-widget__cloud duck-hunt-widget__cloud--1">☁</div>
+                    <div class="duck-hunt-widget__cloud duck-hunt-widget__cloud--2">☁</div>
+                    <div class="duck-hunt-widget__duck">🦆</div>
+                </div>
+                <!-- Ground -->
+                <div class="duck-hunt-widget__ground"></div>
+                <div class="duck-hunt-widget__dirt">
+                    <span>Click to Play!</span>
+                </div>
+            </div>
+        </a>
+
+        <!-- Footer: Social Links & Audio -->
+        <footer class="nav-overlay__footer">
+            <div class="nav-overlay__socials">
+                <a href="https://www.linkedin.com/in/ganasyam-mani-sankar-bugatha-935120303" target="_blank"
+                    rel="noopener">LinkedIn</a>
+                <a href="https://github.com/GSMS-B/" target="_blank" rel="noopener">Github</a>
+                <a href="mailto:bugathaganasyammanisankar@gmail.com">Email</a>
+            </div>
+            <div class="nav-overlay__audio">
+                <span class="nav-overlay__audio-label">Audio Experience</span>
+                <button class="audio-toggle" id="audio-toggle" aria-label="Toggle background music">
+                    <span class="audio-toggle__track">
+                        <span class="audio-toggle__thumb"></span>
+                    </span>
+                </button>
+            </div>
+        </footer>
+    </nav>
+
+    <!-- ============================================
+         MAIN CONTENT
+         ============================================ -->
+    <main class="main" id="main-content">
+
+        <!-- ==========================================
+             SECTION 1: HOME (Hero)
+             Red background with text-behind-image effect
+             ========================================== -->
+        <section class="section section--home" id="home">
+            <!-- Floating Decorative Elements -->
+            <div class="floating-elements" aria-hidden="true">
+                <span class="floating-code floating-code--1">&lt;&gt;</span>
+                <span class="floating-code floating-code--2">{}</span>
+                <span class="floating-code floating-code--3">[]</span>
+                <span class="floating-code floating-code--4">//</span>
+                <span class="floating-code floating-code--5">&lt;!--&gt;</span>
+            </div>
+
+            <!-- Particle Container -->
+            <div class="particles" id="particles-home" aria-hidden="true"></div>
+
+            <div class="hero">
+                <!-- Large Background Text (Behind Image) -->
+                <div class="hero__bg-text" aria-hidden="true">
+                    <span class="hero__bg-letter">D</span>
+                    <span class="hero__bg-letter">E</span>
+                    <span class="hero__bg-letter">V</span>
+                    <span class="hero__bg-letter">E</span>
+                    <span class="hero__bg-letter">L</span>
+                    <span class="hero__bg-letter">O</span>
+                    <span class="hero__bg-letter">P</span>
+                    <span class="hero__bg-letter">E</span>
+                    <span class="hero__bg-letter">R</span>
+                </div>
+
+                <!-- Hero Image (In Front of Text) -->
+                <div class="hero__image-wrapper">
+                    <img src="assets/Adobe Express - file.png" alt="Ganasyam Mani Sankar Bugatha - AI Developer"
+                        class="hero__image" loading="eager">
+                </div>
+
+                <!-- Name with Styled Initials -->
+                <h1 class="hero__name">
+                    <span class="hero__name-part">
+                        <span class="initial">G</span>anasyam
+                    </span>
+                    <span class="hero__name-part">
+                        <span class="initial">M</span>ani
+                    </span>
+                    <span class="hero__name-part">
+                        <span class="initial">S</span>ankar
+                    </span>
+                    <span class="hero__name-part">
+                        <span class="initial">B</span>ugatha
+                    </span>
+                </h1>
+
+                <!-- Tagline -->
+                <p class="hero__tagline">
+                    <span class="tagline-word">AI</span>
+                    <span class="tagline-word">handles</span>
+                    <span class="tagline-word">the</span>
+                    <span class="tagline-word">typing,</span>
+                    <span class="tagline-word">I</span>
+                    <span class="tagline-word">handle</span>
+                    <span class="tagline-word">the</span>
+                    <span class="tagline-word">thinking.</span>
+                </p>
+
+                <!-- Scroll Indicator -->
+                <div class="scroll-indicator">
+                    <span class="scroll-indicator__text">Scroll</span>
+                    <div class="scroll-indicator__arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION 2: ABOUT
+             Black background with glassmorphism cards
+             ========================================== -->
+        <section class="section section--about" id="about">
+            <!-- Floating Decorative Elements -->
+            <div class="floating-elements floating-elements--red" aria-hidden="true">
+                <span class="floating-code floating-code--1">&lt;/&gt;</span>
+                <span class="floating-code floating-code--2">const</span>
+                <span class="floating-code floating-code--3">async</span>
+                <span class="floating-code floating-code--4">=&gt;</span>
+                <span class="floating-code floating-code--5">import</span>
+            </div>
+
+            <div class="about">
+                <h2 class="section-title section-title--light">
+                    <span class="title-letter">A</span>
+                    <span class="title-letter">B</span>
+                    <span class="title-letter">O</span>
+                    <span class="title-letter">U</span>
+                    <span class="title-letter">T</span>
+                </h2>
+
+                <div class="about__content">
+                    <!-- Philosophy Card -->
+                    <article class="glass-card glass-card--philosophy">
+                        <div class="glass-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                        <h3 class="glass-card__title">Philosophy</h3>
+                        <p class="glass-card__text">
+                            I believe in the synergy between human creativity and artificial intelligence.
+                            <strong>AI handles the typing, I handle the thinking.</strong>
+                            This approach lets me focus on what matters most: solving complex problems,
+                            designing elegant systems, and building products that make a difference.
+                        </p>
+                    </article>
+
+                    <!-- Tech Stack Card -->
+                    <article class="glass-card glass-card--tech">
+                        <div class="glass-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="glass-card__title">Tech Stack</h3>
+                        <div class="tech-badges">
+                            <span class="tech-badge" data-delay="0">Python</span>
+                            <span class="tech-badge" data-delay="1">FastAPI</span>
+                            <span class="tech-badge" data-delay="2">LangChain</span>
+                            <span class="tech-badge" data-delay="3">Google Gemini</span>
+                            <span class="tech-badge" data-delay="4">PostgreSQL</span>
+                            <span class="tech-badge" data-delay="5">JavaScript</span>
+                            <span class="tech-badge" data-delay="6">React</span>
+                            <span class="tech-badge" data-delay="7">ChromaDB</span>
+                            <span class="tech-badge" data-delay="8">WebSockets</span>
+                            <span class="tech-badge" data-delay="9">Quantum Computing</span>
+                        </div>
+                    </article>
+
+                    <!-- Interests Card -->
+                    <article class="glass-card glass-card--interests">
+                        <div class="glass-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="glass-card__title">Beyond Code</h3>
+                        <p class="glass-card__text">
+                            When I'm not building AI products, you'll find me diving into
+                            <span class="highlight">finance and investing</span>,
+                            seeking wisdom from the <span class="highlight">Bhagavad Gita</span>,
+                            and exploring <span class="highlight">self-improvement</span> literature.
+                            These diverse interests fuel my perspective on problem-solving.
+                        </p>
+                    </article>
+
+                    <!-- Stats Card -->
+                    <article class="glass-card glass-card--stats">
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <span class="stat__number" data-count="4">0</span>
+                                <span class="stat__label">Live Projects</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat__number" data-count="10">0</span>
+                                <span class="stat__label">Technologies</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat__number" data-count="1000">0</span>
+                                <span class="stat__label">Lines of AI-Assisted Code</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION 3: PROJECTS
+             Black background with carousel & 3D monitor
+             ========================================== -->
+        <section class="section section--projects" id="projects">
+            <div class="projects">
+                <h2 class="section-title section-title--light">
+                    <span class="title-letter">P</span>
+                    <span class="title-letter">R</span>
+                    <span class="title-letter">O</span>
+                    <span class="title-letter">J</span>
+                    <span class="title-letter">E</span>
+                    <span class="title-letter">C</span>
+                    <span class="title-letter">T</span>
+                    <span class="title-letter">S</span>
+                </h2>
+
+                <div class="projects__container">
+                    <!-- Left Side: Project Carousel (60%) -->
+                    <div class="projects__carousel">
+                        <div class="carousel" id="carousel">
+                            <!-- Project 1: ContraSignal -->
+                            <article class="project-card" data-index="0"
+                                data-url="https://gsms-b-contra-signal.hf.space/">
+                                <div class="project-card__inner">
+                                    <div class="project-card__header">
+                                        <span class="project-card__number">01</span>
+                                        <h3 class="project-card__title">ContraSignal</h3>
+                                    </div>
+                                    <p class="project-card__description">
+                                        AI-powered stock analysis in 60 seconds. Multi-agent system using RAG for
+                                        comprehensive market insights.
+                                    </p>
+                                    <div class="project-card__tech">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">FastAPI</span>
+                                        <span class="tech-tag">LangChain</span>
+                                        <span class="tech-tag">ChromaDB</span>
+                                    </div>
+                                    <a href="https://gsms-b-contra-signal.hf.space/" target="_blank" rel="noopener"
+                                        class="project-card__link">
+                                        View Live
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                                            <polyline points="7 7 17 7 17 17"></polyline>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </article>
+
+                            <!-- Project 2: ProjectQR -->
+                            <article class="project-card" data-index="1" data-url="https://projectqr.onrender.com">
+                                <div class="project-card__inner">
+                                    <div class="project-card__header">
+                                        <span class="project-card__number">02</span>
+                                        <h3 class="project-card__title">ProjectQR</h3>
+                                    </div>
+                                    <p class="project-card__description">
+                                        Dynamic QR codes with real-time analytics. Track scans, locations, and
+                                        engagement in a beautiful dashboard.
+                                    </p>
+                                    <div class="project-card__tech">
+                                        <span class="tech-tag">FastAPI</span>
+                                        <span class="tech-tag">PostgreSQL</span>
+                                        <span class="tech-tag">JavaScript</span>
+                                        <span class="tech-tag">Chart.js</span>
+                                    </div>
+                                    <a href="https://projectqr.onrender.com" target="_blank" rel="noopener"
+                                        class="project-card__link">
+                                        View Live
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                                            <polyline points="7 7 17 7 17 17"></polyline>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </article>
+
+                            <!-- Project 3: QuantumLeap -->
+                            <article class="project-card" data-index="2"
+                                data-url="https://quantumleap-optimizer.onrender.com/">
+                                <div class="project-card__inner">
+                                    <div class="project-card__header">
+                                        <span class="project-card__number">03</span>
+                                        <h3 class="project-card__title">QuantumLeap</h3>
+                                    </div>
+                                    <p class="project-card__description">
+                                        Quantum-inspired portfolio optimization using QAOA algorithm. Cutting-edge
+                                        finance meets quantum computing.
+                                    </p>
+                                    <div class="project-card__tech">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">QAOA</span>
+                                        <span class="tech-tag">Financial APIs</span>
+                                    </div>
+                                    <a href="https://quantumleap-optimizer.onrender.com/" target="_blank" rel="noopener"
+                                        class="project-card__link">
+                                        View Live
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                                            <polyline points="7 7 17 7 17 17"></polyline>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </article>
+
+                            <!-- Project 4: Hush.io -->
+                            <article class="project-card" data-index="3" data-url="https://hush-io-chgx.onrender.com/">
+                                <div class="project-card__inner">
+                                    <div class="project-card__header">
+                                        <span class="project-card__number">04</span>
+                                        <h3 class="project-card__title">Hush.io</h3>
+                                    </div>
+                                    <p class="project-card__description">
+                                        Ephemeral messaging with complete anonymity. Zero-storage communication for
+                                        ultimate privacy.
+                                    </p>
+                                    <div class="project-card__tech">
+                                        <span class="tech-tag">WebSockets</span>
+                                        <span class="tech-tag">Encryption</span>
+                                        <span class="tech-tag">Zero-storage</span>
+                                    </div>
+                                    <a href="https://hush-io-chgx.onrender.com/" target="_blank" rel="noopener"
+                                        class="project-card__link">
+                                        View Live
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="7" y1="17" x2="17" y2="7"></line>
+                                            <polyline points="7 7 17 7 17 17"></polyline>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Carousel Navigation -->
+                        <div class="carousel-nav">
+                            <button class="carousel-nav__btn carousel-nav__btn--prev" id="carousel-prev"
+                                aria-label="Previous project">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </button>
+                            <div class="carousel-nav__dots" id="carousel-dots">
+                                <button class="carousel-dot active" data-index="0"
+                                    aria-label="Go to project 1"></button>
+                                <button class="carousel-dot" data-index="1" aria-label="Go to project 2"></button>
+                                <button class="carousel-dot" data-index="2" aria-label="Go to project 3"></button>
+                                <button class="carousel-dot" data-index="3" aria-label="Go to project 4"></button>
+                            </div>
+                            <button class="carousel-nav__btn carousel-nav__btn--next" id="carousel-next"
+                                aria-label="Next project">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: 3D Monitor (40%) -->
+                    <div class="projects__monitor">
+                        <div class="monitor" id="monitor">
+                            <div class="monitor__frame">
+                                <div class="monitor__screen">
+                                    <div class="monitor__content" id="monitor-content">
+                                        <!-- Project preview will be loaded here -->
+                                        <div class="monitor__placeholder">
+                                            <span class="monitor__placeholder-text">Hover on a project</span>
+                                        </div>
+                                        <iframe class="monitor__iframe" id="monitor-iframe"
+                                            title="Project Preview"></iframe>
+                                    </div>
+                                    <div class="monitor__glare"></div>
+                                </div>
+                            </div>
+                            <div class="monitor__stand">
+                                <div class="monitor__stand-neck"></div>
+                                <div class="monitor__stand-base"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION 4: CONTACT
+             Dark header + Red background with social links
+             ========================================== -->
+        <section class="section section--contact" id="contact">
+            <!-- Dark Banner Section -->
+            <div class="contact-banner">
+                <div class="contact-banner__pattern"></div>
+                <h2 class="contact-banner__title">Crafting Digital Experiences</h2>
+            </div>
+
+            <!-- Main Red Contact Section -->
+            <div class="contact-main">
+                <!-- Background Texture -->
+                <div class="contact-main__texture"></div>
+
+                <!-- Marquee Background Text -->
+                <div class="contact-marquee" aria-hidden="true">
+                    <div class="contact-marquee__track">
+                        <span class="contact-marquee__text">Get in touch</span>
+                        <span class="contact-marquee__text">Start a project</span>
+                        <span class="contact-marquee__text">Let's Talk</span>
+                        <span class="contact-marquee__text">Get in touch</span>
+                        <span class="contact-marquee__text">Start a project</span>
+                        <span class="contact-marquee__text">Let's Talk</span>
+                    </div>
+                </div>
+
+                <!-- Contact Content -->
+                <div class="contact-content">
+                    <p class="contact-content__availability">Available for new opportunities</p>
+
+                    <h1 class="contact-content__heading">
+                        <span class="contact-content__line">Let's Build</span>
+                        <span class="contact-content__line contact-content__line--outline">Something</span>
+                    </h1>
+
+                    <!-- Social Links -->
+                    <div class="contact-social">
+                        <a href="mailto:bugathaganasyammanisankar@gmail.com" class="contact-social__link"
+                            aria-label="Send email">
+                            <div class="contact-social__icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                            <span class="contact-social__label">Email</span>
+                        </a>
+
+                        <a href="https://www.linkedin.com/in/ganasyam-mani-sankar-bugatha-935120303" target="_blank"
+                            rel="noopener" class="contact-social__link" aria-label="LinkedIn">
+                            <div class="contact-social__icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                </svg>
+                            </div>
+                            <span class="contact-social__label">LinkedIn</span>
+                        </a>
+
+                        <a href="https://github.com/GSMS-B/" target="_blank" rel="noopener" class="contact-social__link"
+                            aria-label="GitHub">
+                            <div class="contact-social__icon">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                            </div>
+                            <span class="contact-social__label">GitHub</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bottom Info -->
+                <div class="contact-bottom">
+                    <div class="contact-bottom__left">
+                        © 2026 GSMS-B<br>All Rights Reserved
+                    </div>
+                    <div class="contact-bottom__right">
+                        Based in AI Development<br>
+                        Global Reach
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <footer class="contact-footer">
+                <div class="contact-footer__inner">
+                    <div class="contact-footer__brand">
+                        <h3 class="contact-footer__title">GSMS-B Portfolio</h3>
+                        <p class="contact-footer__tagline">Advanced AI solutions wrapped in bold design.</p>
+                    </div>
+                    <div class="contact-footer__links">
+                        <a href="#" class="contact-footer__link">Privacy</a>
+                        <a href="#" class="contact-footer__link">Terms</a>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </main>
+
+    <!-- Hidden Audio Element -->
+    <audio id="ambient-audio" loop preload="none">
+        <source src="assets/Six days.mpeg" type="audio/mpeg">
+    </audio>
+
+    <!-- ============================================
+         SCRIPTS
+         GSAP loaded via CDN, then main script
+         ============================================ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
