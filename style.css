@@ -439,8 +439,7 @@ h6 {
 }
 
 .header.scrolled {
-    background-color: rgba(var(--secondary-rgb), 0.9);
-    backdrop-filter: blur(10px);
+    background-color: transparent;
 }
 
 .header__logo {
@@ -570,7 +569,7 @@ h6 {
     z-index: 1;
 }
 
-/* Header with Logo and Close Button */
+/* Header with Close Button */
 .nav-overlay__header {
     position: absolute;
     top: 0;
@@ -578,7 +577,7 @@ h6 {
     right: 0;
     padding: var(--spacing-md) var(--spacing-lg);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     z-index: 10;
 }
