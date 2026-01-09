@@ -1008,7 +1008,7 @@ h6 {
     font-size: clamp(6rem, 12vh, 10rem);
     font-weight: 900;
     line-height: 0.8;
-    color: rgba(0, 0, 0, 0.35);
+    color: #C42B30;
     z-index: 2;
     user-select: none;
 }
