@@ -465,183 +465,117 @@
         </section>
 
         <!-- ==========================================
-             SECTION 3: PROJECTS
-             Black background with carousel & 3D monitor
+             SECTION 3: PROJECTS (WARDROBE CONCEPT)
+             Interactive closet interaction
              ========================================== -->
-        <section class="section section--projects" id="projects">
-            <div class="projects">
-                <h2 class="section-title section-title--light">
-                    <span class="title-letter">P</span>
-                    <span class="title-letter">R</span>
-                    <span class="title-letter">O</span>
-                    <span class="title-letter">J</span>
-                    <span class="title-letter">E</span>
-                    <span class="title-letter">C</span>
-                    <span class="title-letter">T</span>
-                    <span class="title-letter">S</span>
-                </h2>
+        <section class="section section--wardrobe" id="projects">
+            <!-- DOORS -->
+            <div class="wardrobe-doors">
+                <div class="wardrobe-door wardrobe-door--left">
+                    <div class="wardrobe-door__texture"></div>
+                    <div class="wardrobe-door__handle"></div>
+                </div>
+                <div class="wardrobe-door wardrobe-door--right">
+                    <div class="wardrobe-door__texture"></div>
+                    <div class="wardrobe-door__handle"></div>
+                </div>
+            </div>
 
-                <div class="projects__container">
-                    <!-- Left Side: Project Carousel (60%) -->
-                    <div class="projects__carousel">
-                        <div class="carousel" id="carousel">
-                            <!-- Project 1: ContraSignal -->
-                            <article class="project-card" data-index="0"
-                                data-url="https://gsms-b-contra-signal.hf.space/">
-                                <div class="project-card__inner">
-                                    <div class="project-card__header">
-                                        <span class="project-card__number">01</span>
-                                        <h3 class="project-card__title">ContraSignal</h3>
-                                    </div>
-                                    <p class="project-card__description">
-                                        AI-powered stock analysis in 60 seconds. Multi-agent system using RAG for
-                                        comprehensive market insights.
-                                    </p>
-                                    <div class="project-card__tech">
-                                        <span class="tech-tag">Python</span>
-                                        <span class="tech-tag">FastAPI</span>
-                                        <span class="tech-tag">LangChain</span>
-                                        <span class="tech-tag">ChromaDB</span>
-                                    </div>
-                                    <a href="https://gsms-b-contra-signal.hf.space/" target="_blank" rel="noopener"
-                                        class="project-card__link">
-                                        View Live
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <line x1="7" y1="17" x2="17" y2="7"></line>
-                                            <polyline points="7 7 17 7 17 17"></polyline>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </article>
+            <!-- INTERIOR CONTENT -->
+            <div class="wardrobe-content">
+                <!-- Rack & Wire -->
+                <div class="wardrobe-rack">
+                    <svg class="rack-wire" viewBox="0 0 1000 50" preserveAspectRatio="none">
+                        <path d="M0,10 Q500,60 1000,10" vector-effect="non-scaling-stroke" />
+                    </svg>
 
-                            <!-- Project 2: ProjectQR -->
-                            <article class="project-card" data-index="1" data-url="https://projectqr.onrender.com">
-                                <div class="project-card__inner">
-                                    <div class="project-card__header">
-                                        <span class="project-card__number">02</span>
-                                        <h3 class="project-card__title">ProjectQR</h3>
-                                    </div>
-                                    <p class="project-card__description">
-                                        Dynamic QR codes with real-time analytics. Track scans, locations, and
-                                        engagement in a beautiful dashboard.
-                                    </p>
-                                    <div class="project-card__tech">
-                                        <span class="tech-tag">FastAPI</span>
-                                        <span class="tech-tag">PostgreSQL</span>
-                                        <span class="tech-tag">JavaScript</span>
-                                        <span class="tech-tag">Chart.js</span>
-                                    </div>
-                                    <a href="https://projectqr.onrender.com" target="_blank" rel="noopener"
-                                        class="project-card__link">
-                                        View Live
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <line x1="7" y1="17" x2="17" y2="7"></line>
-                                            <polyline points="7 7 17 7 17 17"></polyline>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </article>
-
-                            <!-- Project 3: QuantumLeap -->
-                            <article class="project-card" data-index="2"
-                                data-url="https://quantumleap-optimizer.onrender.com/">
-                                <div class="project-card__inner">
-                                    <div class="project-card__header">
-                                        <span class="project-card__number">03</span>
-                                        <h3 class="project-card__title">QuantumLeap</h3>
-                                    </div>
-                                    <p class="project-card__description">
-                                        Quantum-inspired portfolio optimization using QAOA algorithm. Cutting-edge
-                                        finance meets quantum computing.
-                                    </p>
-                                    <div class="project-card__tech">
-                                        <span class="tech-tag">Python</span>
-                                        <span class="tech-tag">QAOA</span>
-                                        <span class="tech-tag">Financial APIs</span>
-                                    </div>
-                                    <a href="https://quantumleap-optimizer.onrender.com/" target="_blank" rel="noopener"
-                                        class="project-card__link">
-                                        View Live
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <line x1="7" y1="17" x2="17" y2="7"></line>
-                                            <polyline points="7 7 17 7 17 17"></polyline>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </article>
-
-                            <!-- Project 4: Hush.io -->
-                            <article class="project-card" data-index="3" data-url="https://hush-io-chgx.onrender.com/">
-                                <div class="project-card__inner">
-                                    <div class="project-card__header">
-                                        <span class="project-card__number">04</span>
-                                        <h3 class="project-card__title">Hush.io</h3>
-                                    </div>
-                                    <p class="project-card__description">
-                                        Ephemeral messaging with complete anonymity. Zero-storage communication for
-                                        ultimate privacy.
-                                    </p>
-                                    <div class="project-card__tech">
-                                        <span class="tech-tag">WebSockets</span>
-                                        <span class="tech-tag">Encryption</span>
-                                        <span class="tech-tag">Zero-storage</span>
-                                    </div>
-                                    <a href="https://hush-io-chgx.onrender.com/" target="_blank" rel="noopener"
-                                        class="project-card__link">
-                                        View Live
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <line x1="7" y1="17" x2="17" y2="7"></line>
-                                            <polyline points="7 7 17 7 17 17"></polyline>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </article>
+                    <div class="rack-items">
+                        <!-- Project 1: ContraSignal -->
+                        <div class="rack-item" data-project="contrasignal">
+                            <div class="hanger">
+                                <svg viewBox="0 0 60 40" class="hanger-svg">
+                                    <path d="M10,35 L30,10 L50,35" fill="none" class="hanger-path" stroke-width="4" />
+                                    <path d="M30,10 L30,0" fill="none" class="hanger-hook" stroke-width="4" />
+                                </svg>
+                            </div>
+                            <div class="t-shirt">
+                                <span class="t-shirt__text">CONTRA SIGNAL</span>
+                            </div>
                         </div>
 
-                        <!-- Carousel Navigation -->
-                        <div class="carousel-nav">
-                            <button class="carousel-nav__btn carousel-nav__btn--prev" id="carousel-prev"
-                                aria-label="Previous project">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="15 18 9 12 15 6"></polyline>
+                        <!-- Project 2: ProjectQR -->
+                        <div class="rack-item" data-project="projectqr">
+                            <div class="hanger">
+                                <svg viewBox="0 0 60 40" class="hanger-svg">
+                                    <path d="M10,35 L30,10 L50,35" fill="none" class="hanger-path" stroke-width="4" />
+                                    <path d="M30,10 L30,0" fill="none" class="hanger-hook" stroke-width="4" />
                                 </svg>
-                            </button>
-                            <div class="carousel-nav__dots" id="carousel-dots">
-                                <button class="carousel-dot active" data-index="0"
-                                    aria-label="Go to project 1"></button>
-                                <button class="carousel-dot" data-index="1" aria-label="Go to project 2"></button>
-                                <button class="carousel-dot" data-index="2" aria-label="Go to project 3"></button>
-                                <button class="carousel-dot" data-index="3" aria-label="Go to project 4"></button>
                             </div>
-                            <button class="carousel-nav__btn carousel-nav__btn--next" id="carousel-next"
-                                aria-label="Next project">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="9 18 15 12 9 6"></polyline>
+                            <div class="t-shirt">
+                                <span class="t-shirt__text">PROJECT QR</span>
+                            </div>
+                        </div>
+
+                        <!-- Project 3: PeerAnalyst -->
+                        <div class="rack-item" data-project="peeranalyst">
+                            <div class="hanger">
+                                <svg viewBox="0 0 60 40" class="hanger-svg">
+                                    <path d="M10,35 L30,10 L50,35" fill="none" class="hanger-path" stroke-width="4" />
+                                    <path d="M30,10 L30,0" fill="none" class="hanger-hook" stroke-width="4" />
                                 </svg>
-                            </button>
+                            </div>
+                            <div class="t-shirt">
+                                <span class="t-shirt__text">PEER ANALYST</span>
+                            </div>
+                        </div>
+
+                        <!-- Project 4: Hush.io -->
+                        <div class="rack-item" data-project="hush">
+                            <div class="hanger">
+                                <svg viewBox="0 0 60 40" class="hanger-svg">
+                                    <path d="M10,35 L30,10 L50,35" fill="none" class="hanger-path" stroke-width="4" />
+                                    <path d="M30,10 L30,0" fill="none" class="hanger-hook" stroke-width="4" />
+                                </svg>
+                            </div>
+                            <div class="t-shirt">
+                                <span class="t-shirt__text">HUSH.IO</span>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Right Side: 3D Monitor (40%) -->
-                    <div class="projects__monitor">
-                        <div class="monitor" id="monitor">
-                            <div class="monitor__frame">
-                                <div class="monitor__screen">
-                                    <div class="monitor__content" id="monitor-content">
-                                        <!-- Project preview will be loaded here -->
-                                        <div class="monitor__placeholder">
-                                            <span class="monitor__placeholder-text">Hover on a project</span>
-                                        </div>
-                                        <iframe class="monitor__iframe" id="monitor-iframe"
-                                            title="Project Preview"></iframe>
+                <!-- Preview Area (Laptop + Details) -->
+                <div class="project-preview">
+                    <!-- Left: Details -->
+                    <div class="project-info">
+                        <h3 class="project-info__title">Select a Project</h3>
+                        <p class="project-info__desc">Or browse the collection.</p>
+                        <div class="project-info__tech"></div>
+                        <div class="project-info__links">
+                            <a href="#" class="btn-link btn-link--live" target="_blank">
+                                <span>VIEW LIVE</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                        <button class="btn-back">← Back to Wardrobe</button>
+                    </div>
+
+                    <!-- Right: Laptop -->
+                    <div class="laptop-container">
+                        <div class="laptop">
+                            <div class="laptop__screen">
+                                <div class="laptop__content" id="laptop-content">
+                                    <!-- Placeholder Video -->
+                                    <div class="laptop__placeholder">
+                                        <div class="laptop__logo">GSMS-B</div>
                                     </div>
-                                    <div class="monitor__glare"></div>
                                 </div>
+                                <div class="laptop__glare"></div>
                             </div>
-                            <div class="monitor__stand">
-                                <div class="monitor__stand-neck"></div>
-                                <div class="monitor__stand-base"></div>
-                            </div>
+                            <div class="laptop__base"></div>
                         </div>
                     </div>
                 </div>

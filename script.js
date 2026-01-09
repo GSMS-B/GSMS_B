@@ -815,6 +815,115 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================================
+       WARDROBE INTERACTION
+       Sliding doors, Rack reveal, Laptop preview
+       ============================================ */
+    function initWardrobeProjects() {
+        const section = document.querySelector('.section--wardrobe');
+        const rackItems = document.querySelectorAll('.rack-item');
+        const laptopContent = document.getElementById('laptop-content');
+        const projectInfo = {
+            title: document.querySelector('.project-info__title'),
+            desc: document.querySelector('.project-info__desc'),
+            tech: document.querySelector('.project-info__tech'),
+            link: document.querySelector('.btn-link--live'),
+            backBtn: document.querySelector('.btn-back'),
+            preview: document.querySelector('.project-preview')
+        };
+        const rack = document.querySelector('.wardrobe-rack');
+
+        if (!section || !rackItems.length) return;
+
+        // Data
+        const projects = {
+            'contrasignal': {
+                title: 'ContraSignal',
+                desc: 'AI-powered stock analysis in 60 seconds. Multi-agent system using RAG for comprehensive market insights.',
+                tech: ['Python', 'FastAPI', 'LangChain', 'ChromaDB'],
+                media: '<iframe src="https://gsms-b-contra-signal.hf.space/" title="ContraSignal" style="width:100%;height:100%;border:none;"></iframe>',
+                link: 'https://gsms-b-contra-signal.hf.space/'
+            },
+            'projectqr': {
+                title: 'ProjectQR',
+                desc: 'Next-gen QR management with dynamic links, real-time analytics, and integrated security dashboard.',
+                tech: ['FastAPI', 'PostgreSQL', 'Chart.js', 'Redis'],
+                media: '<div style="width:100%;height:100%;background:#eee;display:flex;align-items:center;justify-content:center;color:#333;font-family:Anton;font-size:1.5rem;">QR DASHBOARD DEMO</div>',
+                link: 'https://projectqr.onrender.com'
+            },
+            'peeranalyst': {
+                title: 'Peer Analyst',
+                desc: 'Automated competitor benchmarking tool. Visualizes market position vs peers using financial data APIs.',
+                tech: ['Python', 'Pandas', 'Plotly', 'FMP API'],
+                media: '<div style="width:100%;height:100%;background:#eee;display:flex;align-items:center;justify-content:center;color:#333;font-family:Anton;font-size:1.5rem;">PEER ANALYTICS GRAPH</div>',
+                link: '#'
+            },
+            'hush': {
+                title: 'Hush.io',
+                desc: 'Ephemeral messaging with complete anonymity. Zero-storage architecture ensuring 100% privacy.',
+                tech: ['WebSockets', 'Crypto', 'Node.js'],
+                media: '<div style="width:100%;height:100%;background:#eee;display:flex;align-items:center;justify-content:center;color:#333;font-family:Anton;font-size:1.5rem;">ENCRYPTED CHAT</div>',
+                link: 'https://hush-io-chgx.onrender.com/'
+            }
+        };
+
+        // GSAP ScrollTrigger
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top top",
+                    end: "+=150%",
+                    pin: true,
+                    scrub: 1,
+                    anticipatePin: 1
+                }
+            });
+
+            tl.to('.wardrobe-door--left', { xPercent: -100, ease: "none", duration: 2 })
+                .to('.wardrobe-door--right', { xPercent: 100, ease: "none", duration: 2 }, "<")
+                .fromTo('.wardrobe-rack',
+                    { scale: 0.95, opacity: 0 },
+                    { scale: 1, opacity: 1, duration: 1 }, "-=1"); // Reveal rack
+        }
+
+        // Interaction
+        rackItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const pid = item.dataset.project;
+                const data = projects[pid];
+                if (!data) return;
+
+                // Animate Rack Out
+                gsap.to(rack, { opacity: 0, y: -50, duration: 0.5, pointerEvents: 'none' });
+
+                // Update Info
+                projectInfo.title.innerText = data.title;
+                projectInfo.desc.innerText = data.desc;
+                projectInfo.link.href = data.link;
+                projectInfo.tech.innerHTML = data.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
+                laptopContent.innerHTML = data.media;
+
+                // Animate Preview In
+                gsap.to(projectInfo.preview, {
+                    opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out",
+                    pointerEvents: 'all'
+                });
+                projectInfo.backBtn.style.display = 'block';
+            });
+        });
+
+        // Back Interaction
+        if (projectInfo.backBtn) {
+            projectInfo.backBtn.addEventListener('click', () => {
+                gsap.to(projectInfo.preview, { opacity: 0, y: 20, duration: 0.5, pointerEvents: 'none' });
+                gsap.to(rack, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out", pointerEvents: 'all' });
+            });
+        }
+    }
+
+    /* ============================================
        13. INITIALIZATION
        Start all modules
        ============================================ */
@@ -824,8 +933,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initNavigation();
         initSmoothScroll();
         initGSAPAnimations();
-        initCarousel();
-        initMonitorParallax();
+        initWardrobeProjects();
         initParticles();
         initAudioSystem(); // Unified audio system
         initCounters();

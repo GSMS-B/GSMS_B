@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    GSMS-B Portfolio Website Stylesheet
    =============================================
    Table of Contents:
@@ -1558,315 +1558,567 @@ h6 {
    11. PROJECTS SECTION
    White background with red text
    ============================================ */
-.section--projects {
-    background: #F9F9F9;
-    color: var(--primary);
-}
-
-.section--projects .section-title--light {
-    color: var(--primary);
-    /* Red heading */
-}
-
-.section--projects .floating-code {
-    color: rgba(var(--primary-rgb), 0.15);
-}
-
-.projects {
+/* ============================================
+   11. WARDROBE PROJECTS SECTION (REVAMP)
+   Interactive closet concept - Technical 3D Look
+   ============================================ */
+.section--wardrobe {
+    height: 100vh;
+    min-height: 800px;
     width: 100%;
-    max-width: 1400px;
-}
-
-.projects__container {
-    display: flex;
-    gap: var(--spacing-lg);
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-/* Carousel Container (60%) */
-.projects__carousel {
-    flex: 1 1 55%;
-    min-width: 300px;
-}
-
-.carousel {
     position: relative;
-    height: 450px;
-    perspective: 1000px;
+    background: #FFFFFF;
+    /* White Background as requested */
+    overflow: hidden;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: auto;
+    /* Allow interaction */
 }
 
-/* Project Card */
-.project-card {
+/* --- DOORS (Initial Overlay) --- */
+.wardrobe-doors {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Pointer events handled by JS/Animation state */
+}
+
+.wardrobe-door {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transform-style: preserve-3d;
+    will-change: transform;
+    background-color: #0A0A0A;
+    /* Deep Black Base */
+}
+
+.wardrobe-door--left {
+    background: #111111;
+    /* Technical Black */
+    border-right: 2px solid rgba(255, 255, 255, 0.05);
+    transform-origin: left center;
+}
+
+.wardrobe-door--right {
+    background: #C42B30;
+    /* GSMS Red Accent for Right Door */
+    border-left: 2px solid rgba(0, 0, 0, 0.2);
+    transform-origin: right center;
+}
+
+/* Technical Texture: White Lines & L-Shapes */
+.wardrobe-door__texture {
+    position: absolute;
+    inset: 0;
+    opacity: 0.3;
+    pointer-events: none;
+    /* Grid Pattern */
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+/* L-Shape Accents at Corners */
+.wardrobe-door__texture::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 40px;
+    height: 40px;
+    border-top: 3px solid rgba(255, 255, 255, 0.6);
+    border-left: 3px solid rgba(255, 255, 255, 0.6);
+}
+
+.wardrobe-door__texture::after {
+    content: '';
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    width: 40px;
+    height: 40px;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.6);
+    border-right: 3px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Handles */
+.wardrobe-door__handle {
+    width: 10px;
+    height: 140px;
+    background: #F6383F;
+    /* Red Handles */
     position: absolute;
     top: 50%;
-    left: 50%;
-    width: 100%;
-    max-width: 400px;
-    transform: translate(-50%, -50%);
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-}
-
-.project-card__inner {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: var(--spacing-lg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    transition: box-shadow var(--transition-normal);
-}
-
-.project-card:hover .project-card__inner {
-    box-shadow: var(--shadow-glow-red);
-}
-
-.project-card__header {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
-}
-
-.project-card__number {
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    color: var(--primary);
-    opacity: 0.5;
-}
-
-.project-card__title {
-    font-size: var(--fs-h3);
-    color: var(--accent);
-}
-
-.project-card__description {
-    color: var(--accent);
-    opacity: 0.8;
-    margin-bottom: var(--spacing-md);
-    line-height: 1.6;
-}
-
-.project-card__tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-md);
-}
-
-.tech-tag {
-    background: rgba(var(--primary-rgb), 0.15);
-    color: var(--primary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 500;
-}
-
-.project-card__link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-    color: var(--primary);
-    font-weight: 600;
-    transition: gap var(--transition-fast);
-}
-
-.project-card__link svg {
-    width: 16px;
-    height: 16px;
-    transition: transform var(--transition-fast);
-}
-
-.project-card__link:hover {
-    gap: var(--spacing-sm);
-}
-
-.project-card__link:hover svg {
-    transform: translate(3px, -3px);
-}
-
-/* Carousel Card States */
-.project-card[data-state="active"] {
-    opacity: 1;
-    z-index: 30;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-.project-card[data-state="prev"] {
-    opacity: 0.3;
-    z-index: 20;
-    transform: translate(-120%, -50%) scale(0.8) rotateY(15deg);
-    pointer-events: none;
-}
-
-.project-card[data-state="next"] {
-    opacity: 0.3;
-    z-index: 20;
-    transform: translate(20%, -50%) scale(0.8) rotateY(-15deg);
-    pointer-events: none;
-}
-
-.project-card[data-state="hidden"] {
-    opacity: 0;
-    z-index: 10;
-    transform: translate(-50%, -50%) scale(0.6);
-    pointer-events: none;
-}
-
-/* Carousel Navigation */
-.carousel-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-md);
-}
-
-.carousel-nav__btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(var(--accent-rgb), 0.1);
-    border: 1px solid rgba(var(--accent-rgb), 0.2);
-    color: var(--accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.carousel-nav__btn:hover {
-    background: var(--primary);
-    transform: scale(1.1);
-}
-
-.carousel-nav__btn svg {
-    width: 24px;
-    height: 24px;
-}
-
-.carousel-nav__dots {
-    display: flex;
-    gap: var(--spacing-xs);
-}
-
-.carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(var(--accent-rgb), 0.3);
-    transition: background-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.carousel-dot:hover,
-.carousel-dot.active {
-    background: var(--primary);
-    transform: scale(1.2);
-}
-
-/* 3D Monitor (40%) */
-.projects__monitor {
-    flex: 1 1 40%;
-    min-width: 300px;
-    perspective: 1500px;
-    display: flex;
-    justify-content: center;
-}
-
-.monitor {
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease-out;
-}
-
-.monitor__frame {
-    width: 350px;
-    height: 220px;
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-    border-radius: 15px;
-    padding: 12px;
+    transform: translateY(-50%);
     box-shadow:
-        0 30px 60px rgba(0, 0, 0, 0.4),
-        0 0 0 2px rgba(255, 255, 255, 0.1);
+        inset 1px 1px 0 rgba(255, 255, 255, 0.4),
+        0 10px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    z-index: 10;
 }
 
-.monitor__screen {
-    width: 100%;
-    height: 100%;
-    background: #0a0a0a;
-    border-radius: 8px;
-    overflow: hidden;
+.wardrobe-door--left .wardrobe-door__handle {
+    right: 30px;
+}
+
+.wardrobe-door--right .wardrobe-door__handle {
+    left: 30px;
+    background: #111;
+    /* Contrast handle on red door */
+}
+
+
+/* --- INTERIOR CONTENT --- */
+.wardrobe-content {
     position: relative;
-}
-
-.monitor__content {
     width: 100%;
     height: 100%;
-    position: relative;
-}
-
-.monitor__placeholder {
-    width: 100%;
-    height: 100%;
+    max-width: none;
+    /* Full Width */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    flex-direction: column;
+    padding: 0;
 }
 
-.monitor__placeholder-text {
-    color: rgba(var(--accent-rgb), 0.3);
-    font-size: var(--fs-small);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-.monitor__iframe {
+/* --- RACK SYSTEM --- */
+.wardrobe-rack {
+    position: relative;
     width: 100%;
-    height: 100%;
-    border: none;
-    display: none;
-    transform: scale(0.5);
-    transform-origin: top left;
-    width: 200%;
-    height: 200%;
-}
-
-.monitor__iframe.loaded {
-    display: block;
-}
-
-.monitor__glare {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-.monitor__stand {
+    height: 45%;
+    z-index: 10;
+    padding-top: 60px;
+    /* Space from top */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.monitor__stand-neck {
-    width: 40px;
-    height: 50px;
-    background: linear-gradient(90deg, #2a2a2a 0%, #1a1a1a 50%, #2a2a2a 100%);
+.rack-wire {
+    width: 100%;
+    height: 60px;
+    overflow: visible;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    stroke: #1E1E1C;
+    /* Black Wire */
+    stroke-width: 5px;
+    stroke-linecap: round;
+    fill: none;
+    z-index: 1;
 }
 
-.monitor__stand-base {
-    width: 120px;
-    height: 15px;
-    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+.rack-items {
+    display: flex;
+    justify-content: center;
+    gap: 4vw;
+    /* Responsive spacing */
+    width: 90%;
+    padding-top: 15px;
+    /* Offset to hang on wire */
+    z-index: 2;
+}
+
+.rack-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: top center;
+    animation: sway 6s ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+}
+
+.rack-item:nth-child(1) {
+    --delay: 0s;
+}
+
+.rack-item:nth-child(2) {
+    --delay: 1.5s;
+}
+
+.rack-item:nth-child(3) {
+    --delay: 0.7s;
+}
+
+.rack-item:nth-child(4) {
+    --delay: 2.2s;
+}
+
+.rack-item:hover {
+    transform: scale(1.1) translateY(-10px) rotate(0deg) !important;
+    z-index: 50;
+    animation-play-state: paused;
+}
+
+@keyframes sway {
+
+    0%,
+    100% {
+        transform: rotate(-2deg);
+    }
+
+    50% {
+        transform: rotate(2deg);
+    }
+}
+
+/* Hanger */
+.hanger {
+    width: 60px;
+    height: 35px;
+    margin-bottom: -4px;
+    z-index: 2;
+    filter: drop-shadow(0 4px 2px rgba(0, 0, 0, 0.2));
+}
+
+.hanger-svg {
+    overflow: visible;
+}
+
+.hanger-path {
+    stroke: #C42B30;
+    stroke-width: 4px;
+    stroke-linecap: round;
+    shape-rendering: geometricPrecision;
+}
+
+.hanger-hook {
+    stroke: #666;
+    stroke-width: 3px;
+}
+
+/* T-Shirt */
+.t-shirt {
+    width: 100px;
+    height: 160px;
+    background: #1E1E1C;
+    /* Black Shirt */
+    border-radius: 12px 12px 6px 6px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Sleeves */
+.t-shirt::before,
+.t-shirt::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 28px;
+    height: 45px;
+    background: #1E1E1C;
+    border-radius: 6px;
+    z-index: -1;
+}
+
+.t-shirt::before {
+    left: -14px;
+    transform: rotate(25deg);
+}
+
+.t-shirt::after {
+    right: -14px;
+    transform: rotate(-25deg);
+}
+
+/* Vertical Text */
+.t-shirt__text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    /* Bottom-to-Top Reading */
+    color: white;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0.9;
+}
+
+
+/* --- PREVIEW AREA (Detail + Laptop) --- */
+.project-preview {
+    flex: 1;
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+    opacity: 0;
+    /* Animated by JS */
+    transform: translateY(20px);
+}
+
+.project-info {
+    width: 35%;
+    padding-top: 2rem;
+    padding-left: 2rem;
+}
+
+.project-info__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    text-transform: uppercase;
+    color: #1E1E1C;
+    line-height: 0.9;
+    margin-bottom: 1rem;
+}
+
+.project-info__desc {
+    font-family: var(--font-body);
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.project-info__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.tech-tag {
+    background: #f0f0f0;
+    color: #333;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.btn-link--live {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #1E1E1C;
+    color: white;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
+    letter-spacing: 0.1em;
+    font-size: 1.2rem;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+    /* Tech Shape */
+    transition: all 0.3s ease;
+}
+
+.btn-link--live:hover {
+    background: #C42B30;
+    padding: 1rem 2.5rem;
+    /* Expansion effect */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.btn-link--live svg {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-back {
+    margin-top: 1rem;
+    border: none;
+    background: none;
+    color: #999;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    display: none;
+    /* Controlled by JS */
+}
+
+.btn-back:hover {
+    color: #C42B30;
+}
+
+
+/* --- HIGH QUALITY CSS LAPTOP --- */
+.laptop-container {
+    width: 60%;
+    margin-right: 2rem;
+    perspective: 2000px;
+    animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.laptop {
+    width: 100%;
+    transform-style: preserve-3d;
+    transform: rotateY(-15deg) rotateX(5deg);
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.laptop:hover {
+    transform: rotateY(0deg) rotateX(0deg) scale(1.02);
+}
+
+.laptop__screen {
+    background: #0d0d0d;
+    border-radius: 12px 12px 0 0;
+    padding: 3%;
+    background: linear-gradient(135deg, #444 0%, #222 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+        0 20px 40px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+/* Browser Dots */
+.laptop__screen::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #FF5F56;
+    /* Red */
+    box-shadow:
+        18px 0 0 #FFBD2E,
+        /* Yellow */
+        36px 0 0 #27C93F;
+    /* Green */
+    z-index: 10;
+}
+
+.laptop__content {
+    background: #fff;
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    background: #111;
+}
+
+.laptop__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-heading);
+    color: #333;
+    font-size: 2rem;
+    background: #f5f5f5;
+}
+
+.laptop__base {
+    height: 18px;
+    background: linear-gradient(to bottom, #d6d6d6, #9e9e9e);
     border-radius: 0 0 10px 10px;
+    position: relative;
+    margin-top: -1px;
 }
 
+.laptop__base::before {
+    /* Notch */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12%;
+    height: 6px;
+    background: #b0b0b0;
+    border-radius: 0 0 6px 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .wardrobe-doors {
+        display: none;
+    }
+
+    /* Simplify for mobile, just show rack */
+    .section--wardrobe {
+        background: #fff;
+        height: auto;
+        min-height: 100vh;
+        padding: 4rem 0;
+    }
+
+    .wardrobe-rack {
+        height: auto;
+        padding-top: 0;
+        margin-bottom: 2rem;
+    }
+
+    .rack-items {
+        width: 100%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .rack-item {
+        flex-shrink: 0;
+    }
+
+    .project-preview {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .laptop-container {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 2rem;
+    }
+
+    .project-info {
+        width: 100%;
+        padding: 0 1.5rem;
+        text-align: center;
+    }
+
+    .project-info__tech {
+        justify-content: center;
+    }
+
+    .btn-link--live {
+        width: 100%;
+        justify-content: center;
+    }
+}
 /* ============================================
    12. CONTACT SECTION - REDESIGNED
    Dark banner, red main section with marquee
