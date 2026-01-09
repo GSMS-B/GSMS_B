@@ -1130,7 +1130,7 @@ h6 {
 }
 
 .hero-marquee--top {
-    top: 130px;
+    top: 105px;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
