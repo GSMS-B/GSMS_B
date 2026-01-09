@@ -2801,3 +2801,6 @@ h6 {
         color: black;
     }
 }
+
+/* Tailwind Detail View Helpers */
+.corner-accent { position: absolute; width: 20px; height: 20px; border-color: #ffffff; border-style: solid; pointer-events: none; opacity: 0.3; } .dark .corner-accent { border-color: #ffffff; } .light .corner-accent { border-color: #000000; } .corner-tl { top: 0; left: 0; border-width: 1px 0 0 1px; } .corner-tr { top: 0; right: 0; border-width: 1px 1px 0 0; } .corner-bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; } .corner-br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }

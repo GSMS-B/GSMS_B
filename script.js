@@ -816,60 +816,83 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ============================================
        WARDROBE INTERACTION
-       Sliding doors, Rack reveal, Laptop preview
+       Sliding doors, Rack reveal, High-Fidelity Preview
        ============================================ */
     function initWardrobeProjects() {
         const section = document.querySelector('.section--wardrobe');
         const rackItems = document.querySelectorAll('.rack-item');
-        const laptopContent = document.getElementById('laptop-content');
-        const projectInfo = {
-            title: document.querySelector('.project-info__title'),
-            desc: document.querySelector('.project-info__desc'),
-            tech: document.querySelector('.project-info__tech'),
-            link: document.querySelector('.btn-link--live'),
-            backBtn: document.querySelector('.btn-back'),
-            preview: document.querySelector('.project-preview')
-        };
+        const preview = document.querySelector('.project-preview');
         const rack = document.querySelector('.wardrobe-rack');
 
-        if (!section || !rackItems.length) return;
+        // UI Elements
+        const ui = {
+            titleStart: document.getElementById('project-title-start'),
+            titleEnd: document.getElementById('project-title-end'),
+            tagline: document.getElementById('project-tagline'),
+            desc: document.getElementById('project-desc'),
+            tech: document.getElementById('project-tech'),
+            urlBar: document.getElementById('project-url-bar'),
+            monitorView: document.getElementById('project-monitor-view'),
+            linkLive: document.getElementById('project-link-live'),
+            linkCode: document.getElementById('project-link-code'),
+            backBtn: document.getElementById('btn-back-wardrobe'),
+            index: document.getElementById('project-index')
+        };
 
-        // Data
+        if (!section || !rackItems.length || !preview) return;
+
+        // Project Data
         const projects = {
             'contrasignal': {
-                title: 'ContraSignal',
-                desc: 'AI-powered stock analysis in 60 seconds. Multi-agent system using RAG for comprehensive market insights.',
-                tech: ['Python', 'FastAPI', 'LangChain', 'ChromaDB'],
-                media: '<iframe src="https://gsms-b-contra-signal.hf.space/" title="ContraSignal" style="width:100%;height:100%;border:none;"></iframe>',
-                link: 'https://gsms-b-contra-signal.hf.space/'
+                titleStart: 'Contra', titleEnd: 'Signal',
+                tagline: '// Market Sentiment Analysis Engine',
+                desc: `<p>"When negative news breaks, stock prices crash. But is it a disaster or a discount? "</p>
+                       <p class="mt-4">ContraSignal autonomously scrapes global news feeds, processing sentiment through LLMs to identify overreactions in real-time. It visualizes the delta between market perception and fundamental reality.</p>`,
+                tech: ['Python', 'FastAPI', 'LangChain', 'ChromaDB', 'React'],
+                url: 'localhost:8000/dashboard',
+                live: 'https://gsms-b-contra-signal.hf.space/',
+                code: 'https://github.com/GSMS-B/GSMS_B',
+                // Live Iframe
+                media: `<iframe src="https://gsms-b-contra-signal.hf.space/" title="ContraSignal" class="w-full h-full border-0 bg-white dark:bg-black"></iframe>`
             },
             'projectqr': {
-                title: 'ProjectQR',
-                desc: 'Next-gen QR management with dynamic links, real-time analytics, and integrated security dashboard.',
+                titleStart: 'Project', titleEnd: 'QR',
+                tagline: '// Dynamic Link Management',
+                desc: `<p>Static QR codes are dead. ProjectQR introduces a dynamic layer, allowing you to change destination URLs instantly without reprinting.</p>
+                       <p class="mt-4">Featuring real-time scan analytics, geolocation tracking, and expiration management. Built for enterprise scalability.</p>`,
                 tech: ['FastAPI', 'PostgreSQL', 'Chart.js', 'Redis'],
-                media: '<div style="width:100%;height:100%;background:#eee;display:flex;align-items:center;justify-content:center;color:#333;font-family:Anton;font-size:1.5rem;">QR DASHBOARD DEMO</div>',
-                link: 'https://projectqr.onrender.com'
+                url: 'projectqr.onrender.com',
+                live: 'https://projectqr.onrender.com',
+                code: '#',
+                media: `<div class="w-full h-full flex flex-col items-center justify-center bg-gray-50 dark:bg-[#050505] p-8 text-center"><span class="material-icons text-6xl text-gray-800 mb-4">qr_code_2</span><h3 class="font-display text-2xl text-black">QR Analytics Dashboard</h3><p class="text-xs font-mono text-gray-600 mt-2">Visualization Module Loading...</p></div>`
             },
             'peeranalyst': {
-                title: 'Peer Analyst',
-                desc: 'Automated competitor benchmarking tool. Visualizes market position vs peers using financial data APIs.',
+                titleStart: 'Peer', titleEnd: 'Analyst',
+                tagline: '// Competitive Benchmarking',
+                desc: `<p>Stop manually comparing 10Ks. PeerAnalyst ingests financial statements to generate automated peer comparison matrices.</p>
+                       <p class="mt-4">Visualize EBITDA margins, revenue growth, and debt ratios against industry averages instantly.</p>`,
                 tech: ['Python', 'Pandas', 'Plotly', 'FMP API'],
-                media: '<div style="width:100%;height:100%;background:#eee;display:flex;align-items:center;justify-content:center;color:#333;font-family:Anton;font-size:1.5rem;">PEER ANALYTICS GRAPH</div>',
-                link: '#'
+                url: 'data.pipeline/peer-analysis',
+                live: '#',
+                code: '#',
+                media: `<div class="w-full h-full flex flex-col items-center justify-center bg-gray-50 dark:bg-[#050505] p-8 text-center"><span class="material-icons text-6xl text-gray-800 mb-4">bar_chart</span><h3 class="font-display text-2xl text-black">Market Position Matrix</h3></div>`
             },
             'hush': {
-                title: 'Hush.io',
-                desc: 'Ephemeral messaging with complete anonymity. Zero-storage architecture ensuring 100% privacy.',
-                tech: ['WebSockets', 'Crypto', 'Node.js'],
-                media: '<div style="width:100%;height:100%;background:#eee;display:flex;align-items:center;justify-content:center;color:#333;font-family:Anton;font-size:1.5rem;">ENCRYPTED CHAT</div>',
-                link: 'https://hush-io-chgx.onrender.com/'
+                titleStart: 'Hush', titleEnd: '.io',
+                tagline: '// Zero-Knowledge Messaging',
+                desc: `<p>Privacy is not a feature, it's the foundation. Hush.io ensures your messages are encrypted in transit and deleted on receipt.</p>
+                       <p class="mt-4">No database. No logs. No trace. Pure ephemeral communication powered by WebSockets.</p>`,
+                tech: ['WebSockets', 'Crypto', 'Node.js', 'Redis'],
+                url: 'hush.io/secure-channel',
+                live: 'https://hush-io-chgx.onrender.com/',
+                code: '#',
+                media: `<div class="w-full h-full flex flex-col items-center justify-center bg-gray-50 dark:bg-[#050505] p-8 text-center"><span class="material-icons text-6xl text-gray-800 mb-4">lock</span><h3 class="font-display text-2xl text-black">End-to-End Encrypted Details</h3></div>`
             }
         };
 
-        // GSAP ScrollTrigger
+        // ScrollTrigger
         if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             gsap.registerPlugin(ScrollTrigger);
-
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: section,
@@ -880,45 +903,116 @@ document.addEventListener('DOMContentLoaded', () => {
                     anticipatePin: 1
                 }
             });
-
             tl.to('.wardrobe-door--left', { xPercent: -100, ease: "none", duration: 2 })
                 .to('.wardrobe-door--right', { xPercent: 100, ease: "none", duration: 2 }, "<")
-                .fromTo('.wardrobe-rack',
-                    { scale: 0.95, opacity: 0 },
-                    { scale: 1, opacity: 1, duration: 1 }, "-=1"); // Reveal rack
+                .fromTo(rack, { scale: 0.95, opacity: 0 }, { scale: 1, opacity: 1, duration: 1 }, "-=1");
         }
 
+        // Helper to convert keys to array for navigation
+        const projectKeys = Object.keys(projects);
+        let currentIndex = 0;
+
         // Interaction
-        rackItems.forEach(item => {
+        rackItems.forEach((item, idx) => {
             item.addEventListener('click', () => {
-                const pid = item.dataset.project;
-                const data = projects[pid];
-                if (!data) return;
-
-                // Animate Rack Out
-                gsap.to(rack, { opacity: 0, y: -50, duration: 0.5, pointerEvents: 'none' });
-
-                // Update Info
-                projectInfo.title.innerText = data.title;
-                projectInfo.desc.innerText = data.desc;
-                projectInfo.link.href = data.link;
-                projectInfo.tech.innerHTML = data.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
-                laptopContent.innerHTML = data.media;
-
-                // Animate Preview In
-                gsap.to(projectInfo.preview, {
-                    opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out",
-                    pointerEvents: 'all'
-                });
-                projectInfo.backBtn.style.display = 'block';
+                openProject(idx);
             });
         });
 
-        // Back Interaction
-        if (projectInfo.backBtn) {
-            projectInfo.backBtn.addEventListener('click', () => {
-                gsap.to(projectInfo.preview, { opacity: 0, y: 20, duration: 0.5, pointerEvents: 'none' });
-                gsap.to(rack, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out", pointerEvents: 'all' });
+        function openProject(index) {
+            currentIndex = index;
+            const pid = projectKeys[index];
+            const data = projects[pid];
+            if (!data) return;
+
+            // 1. Lock Body & HTML Scroll (Fixes "double scrollbar" & "wardrobe interaction")
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+
+            // 2. Hide Global Header (Fixes "Back button unclickable" & "Remove GSMS-B")
+            const header = document.getElementById('header');
+            if (header) header.style.display = 'none';
+
+            // 3. Hide Rack (Visual only, behind modal)
+            gsap.to(rack, { opacity: 0, y: -50, duration: 0.5, pointerEvents: 'none' });
+
+            // 3. Populate Data
+            updateModalUI(data, index);
+
+            // 4. Reveal Preview
+            gsap.set(preview, { display: 'block', opacity: 0 }); // Ensure clean start
+            gsap.to(preview, {
+                opacity: 1, y: 0, duration: 0.5, ease: "power3.out",
+                pointerEvents: 'all'
+            });
+        }
+
+        function updateModalUI(data, index) {
+            if (ui.titleStart) ui.titleStart.textContent = data.titleStart;
+            if (ui.titleEnd) ui.titleEnd.textContent = data.titleEnd;
+            if (ui.tagline) ui.tagline.textContent = data.tagline;
+            if (ui.desc) ui.desc.innerHTML = data.desc;
+            if (ui.urlBar) ui.urlBar.innerHTML = `<span class="material-icons text-[10px]">lock</span> ${data.url}`;
+            if (ui.monitorView) ui.monitorView.innerHTML = data.media;
+            if (ui.index) ui.index.textContent = `0${index + 1}`;
+
+            // Tech Stack
+            if (ui.tech) {
+                ui.tech.innerHTML = data.tech.map(t => {
+                    const style = t === 'React' || t === 'Python' ? 'bg-black dark:bg-white text-white dark:text-black' : 'border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300';
+                    return `<span class="px-3 py-1 text-xs font-bold uppercase tracking-wider ${style}">${t}</span>`;
+                }).join('');
+            }
+
+            // Links
+            if (ui.linkLive) { ui.linkLive.href = data.live; }
+            if (ui.linkCode) { ui.linkCode.href = data.code; }
+
+            // Show Nav Buttons
+            const btnPrev = document.getElementById('btn-prev-project');
+            const btnNext = document.getElementById('btn-next-project');
+            if (btnPrev) { btnPrev.style.display = 'inline'; btnPrev.innerText = 'Prev Project'; }
+            if (btnNext) { btnNext.style.display = 'inline'; btnNext.innerText = 'Next Project'; }
+        }
+
+        function closePreview() {
+            // Unlock body & HTML scroll
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+
+            // Restore Global Header
+            const header = document.getElementById('header');
+            if (header) header.style.display = ''; // Restore default (flex)
+
+            gsap.to(preview, {
+                opacity: 0, y: 20, duration: 0.5, pointerEvents: 'none',
+                onComplete: () => { gsap.set(preview, { display: 'none' }); }
+            });
+            gsap.to(rack, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out", pointerEvents: 'all' });
+        }
+
+        // Back Button
+        if (ui.backBtn) {
+            ui.backBtn.addEventListener('click', closePreview);
+        }
+
+        // Navigation Logic
+        const btnPrev = document.getElementById('btn-prev-project');
+        const btnNext = document.getElementById('btn-next-project');
+
+        if (btnPrev) {
+            btnPrev.addEventListener('click', () => {
+                let newIndex = currentIndex - 1;
+                if (newIndex < 0) newIndex = projectKeys.length - 1; // Loop
+                openProject(newIndex);
+            });
+        }
+
+        if (btnNext) {
+            btnNext.addEventListener('click', () => {
+                let newIndex = currentIndex + 1;
+                if (newIndex >= projectKeys.length) newIndex = 0; // Loop
+                openProject(newIndex);
             });
         }
     }
