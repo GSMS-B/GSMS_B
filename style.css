@@ -997,6 +997,104 @@ h6 {
     z-index: 1;
 }
 
+/* ============================================
+   HERO MARQUEES - Top and Bottom
+   ============================================ */
+.hero-marquee {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.hero-marquee--top {
+    top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.hero-marquee--bottom {
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.hero-marquee__track {
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+}
+
+/* TOP MARQUEE - Scrolls Left */
+.hero-marquee__track--1 {
+    animation: heroMarqueeLeft 25s linear infinite;
+}
+
+.hero-marquee__track--2 {
+    animation: heroMarqueeLeft 28s linear infinite;
+    animation-delay: 1s;
+}
+
+/* BOTTOM MARQUEE - Scrolls Right */
+.hero-marquee__track--reverse-1 {
+    animation: heroMarqueeRight 25s linear infinite;
+}
+
+.hero-marquee__track--reverse-2 {
+    animation: heroMarqueeRight 28s linear infinite;
+    animation-delay: 1s;
+}
+
+.hero-marquee__text {
+    font-family: var(--font-heading);
+    font-size: clamp(0.8rem, 1.5vw, 1.2rem);
+    color: rgba(0, 0, 0, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0 1rem;
+    flex-shrink: 0;
+}
+
+@keyframes heroMarqueeLeft {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes heroMarqueeRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-marquee--top {
+        top: 70px;
+    }
+
+    .hero-marquee--bottom {
+        bottom: 20px;
+    }
+
+    .hero-marquee__text {
+        font-size: 0.65rem;
+        padding: 0 0.5rem;
+    }
+}
+
 /* Vertical GSMS-B Letters (Left Side) */
 .hero-vertical-text {
     position: absolute;
