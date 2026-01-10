@@ -160,6 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         DOM.hamburger?.classList.toggle('active', state.isMenuOpen);
         DOM.navOverlay?.classList.toggle('active', state.isMenuOpen);
+        DOM.header?.classList.toggle('menu-open', state.isMenuOpen);
 
         // Prevent body scroll when menu is open
         document.body.style.overflow = state.isMenuOpen ? 'hidden' : '';

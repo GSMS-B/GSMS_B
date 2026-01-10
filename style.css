@@ -442,6 +442,17 @@ h6 {
     transform: translateY(-3px);
 }
 
+/* Header Title default white */
+.header-title {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+/* Turn RED when menu is open */
+.header.menu-open .header-title {
+    color: var(--primary);
+}
+
 /* Audio Vibe Control */
 .audio-control {
     display: flex;
