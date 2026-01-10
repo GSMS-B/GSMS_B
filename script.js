@@ -119,67 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 200);
     }
 
-    /* ============================================
-       3. CUSTOM CURSOR
-       Interactive cursor following mouse movement
-       ============================================ */
-    function initCursor() {
-        // Only initialize for devices with hover capability
-        if (window.matchMedia('(hover: none)').matches) return;
 
-        let cursorX = 0, cursorY = 0;
-        let followerX = 0, followerY = 0;
-
-        // Track mouse position
-        document.addEventListener('mousemove', (e) => {
-            cursorX = e.clientX;
-            cursorY = e.clientY;
-            state.mouseX = e.clientX;
-            state.mouseY = e.clientY;
-        });
-
-        // Smooth cursor animation using requestAnimationFrame
-        function animateCursor() {
-            // Instant cursor
-            if (DOM.cursor) {
-                DOM.cursor.style.left = `${cursorX}px`;
-                DOM.cursor.style.top = `${cursorY}px`;
-            }
-
-            // Smooth follower with lerp
-            const ease = 0.15;
-            followerX += (cursorX - followerX) * ease;
-            followerY += (cursorY - followerY) * ease;
-
-            if (DOM.cursorFollower) {
-                DOM.cursorFollower.style.left = `${followerX}px`;
-                DOM.cursorFollower.style.top = `${followerY}px`;
-            }
-
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Add hover effects to interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .project-card, .glass-card, .tech-badge');
-
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                DOM.cursorFollower?.classList.add('hovering');
-            });
-            el.addEventListener('mouseleave', () => {
-                DOM.cursorFollower?.classList.remove('hovering');
-            });
-        });
-
-        // Click effect
-        document.addEventListener('mousedown', () => {
-            DOM.cursorFollower?.classList.add('clicking');
-        });
-        document.addEventListener('mouseup', () => {
-            DOM.cursorFollower?.classList.remove('clicking');
-        });
-    }
 
     /* ============================================
        4. NAVIGATION (Hamburger Menu)
@@ -1141,7 +1081,7 @@ document.addEventListener('DOMContentLoaded', () => {
        ============================================ */
     function init() {
         initLoader();
-        initCursor();
+
         initNavigation();
         initSmoothScroll();
         initGSAPAnimations();
