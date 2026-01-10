@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Loader
         loader: document.getElementById('loader'),
         loaderProgress: document.querySelector('.loader__progress'),
+        loaderPercentage: document.querySelector('.loader__percentage'),
 
         // Cursor
         cursor: document.getElementById('cursor'),
@@ -101,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Simulate loading progress
         let progress = 0;
         const interval = setInterval(() => {
-            progress += Math.random() * 30;
+            progress += Math.random() * 5; // Slower increment for smoothness
             if (progress >= 100) {
                 progress = 100;
                 clearInterval(interval);
@@ -113,10 +114,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(initEntryAnimations, 300);
                 }, 500);
             }
+
+            // Update UI
             if (DOM.loaderProgress) {
                 DOM.loaderProgress.style.width = `${progress}%`;
             }
-        }, 200);
+            if (DOM.loaderPercentage) {
+                DOM.loaderPercentage.innerText = `${Math.round(progress)}%`;
+            }
+        }, 50); // Faster updates for smoother visual
     }
 
 
