@@ -25,15 +25,16 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap"
         rel="stylesheet">
-    <!-- New Fonts for Wardrobe Detail View -->
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@300;400;500;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Tailwind CSS (Scoped) -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -41,7 +42,13 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: "#E63946",
+                        "primary": "#FF3333", "primary-dim": "#8a1c1c",
+                        "dark-bg": "#0a0a0a",
+                        "panel-bg": "#121212",
+                        "border-color": "#333333",
+                        "text-main": "#ededed",
+                        "text-muted": "#888888",
+                        // Legacy colors for compatibility
                         "background-light": "#F5F5F5",
                         "background-dark": "#0A0A0A",
                         "surface-dark": "#121212",
@@ -49,12 +56,13 @@
                         "border-dark": "#333333",
                     },
                     fontFamily: {
-                        display: ["Anton", "sans-serif"],
-                        mono: ["JetBrains Mono", "monospace"],
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                        "legacy-display": ["Anton", "sans-serif"], // Renaming old display font to avoid conflict
                     },
-                    borderRadius: {
-                        DEFAULT: "4px",
-                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)",
+                    }
                 },
             },
         };
@@ -394,103 +402,363 @@
              SECTION 2: ABOUT
              Black background with glassmorphism cards
              ========================================== -->
-        <section class="section section--about" id="about">
-            <!-- Floating Decorative Elements -->
-            <div class="floating-elements floating-elements--red" aria-hidden="true">
-                <span class="floating-code floating-code--1">&lt;/&gt;</span>
-                <span class="floating-code floating-code--2">const</span>
-                <span class="floating-code floating-code--3">async</span>
-                <span class="floating-code floating-code--4">=&gt;</span>
-                <span class="floating-code floating-code--5">import</span>
-            </div>
+        <!-- ==========================================
+             SECTION 2: ABOUT (Human-AI Nexus)
+             Technical dashboard style
+             ========================================== -->
+        <section class="section section--about relative overflow-hidden" id="about">
+            <div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-20 pointer-events-none z-0"></div>
 
-            <div class="about">
-                <h2 class="section-title section-title--light">
-                    <span class="title-letter">A</span>
-                    <span class="title-letter">B</span>
-                    <span class="title-letter">O</span>
-                    <span class="title-letter">U</span>
-                    <span class="title-letter">T</span>
-                </h2>
-
-                <div class="about__content">
-                    <!-- Philosophy Card -->
-                    <article class="glass-card glass-card--philosophy">
-                        <div class="glass-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                            </svg>
+            <div class="w-full max-w-[1400px] flex flex-col gap-8 relative z-10">
+                <section
+                    class="flex flex-col md:flex-row justify-between items-end gap-6 pb-6 border-b border-border-color">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span
+                                class="inline-flex items-center gap-1.5 px-2 py-1 bg-primary/20 border border-primary/40 text-primary text-[10px] font-bold uppercase tracking-widest">
+                                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                System Active
+                            </span>
+                            <span class="text-muted text-xs font-mono">DASHBOARD_V.5.0</span>
                         </div>
-                        <h3 class="glass-card__title">Philosophy</h3>
-                        <p class="glass-card__text">
-                            I believe in the synergy between human creativity and artificial intelligence.
-                            <strong>AI handles the typing, I handle the thinking.</strong>
-                            This approach lets me focus on what matters most: solving complex problems,
-                            designing elegant systems, and building products that make a difference.
+                        <h1
+                            class="text-4xl md:text-6xl font-display font-bold uppercase tracking-tight text-white leading-none">
+                            Human-AI <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-white">Nexus</span>
+                        </h1>
+                        <p class="text-muted max-w-2xl font-mono text-sm mt-2 border-l-2 border-primary pl-4">
+                            // OPERATIONAL OVERVIEW: Analyzing the collaborative efficiency between biological intuition
+                            and synthetic logic.
                         </p>
-                    </article>
-
-                    <!-- Tech Stack Card -->
-                    <article class="glass-card glass-card--tech">
-                        <div class="glass-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="16 18 22 12 16 6"></polyline>
-                                <polyline points="8 6 2 12 8 18"></polyline>
-                            </svg>
+                    </div>
+                    <div class="flex gap-4 items-center">
+                        <div class="text-right hidden sm:block">
+                            <div class="text-[10px] text-muted uppercase tracking-widest">Availability</div>
+                            <div class="text-primary font-bold">OPEN FOR CONTRACTS</div>
                         </div>
-                        <h3 class="glass-card__title">Tech Stack</h3>
-                        <div class="tech-badges">
-                            <span class="tech-badge" data-delay="0">Python</span>
-                            <span class="tech-badge" data-delay="1">FastAPI</span>
-                            <span class="tech-badge" data-delay="2">LangChain</span>
-                            <span class="tech-badge" data-delay="3">Google Gemini</span>
-                            <span class="tech-badge" data-delay="4">PostgreSQL</span>
-                            <span class="tech-badge" data-delay="5">JavaScript</span>
-                            <span class="tech-badge" data-delay="6">React</span>
-                            <span class="tech-badge" data-delay="7">ChromaDB</span>
-                            <span class="tech-badge" data-delay="8">WebSockets</span>
-                            <span class="tech-badge" data-delay="9">Quantum Computing</span>
+                        <div class="h-10 w-[1px] bg-border-color hidden sm:block"></div>
+                        <div class="text-right hidden sm:block">
+                            <div class="text-[10px] text-muted uppercase tracking-widest">Latency</div>
+                            <div class="text-white font-bold">12ms</div>
                         </div>
-                    </article>
-
-                    <!-- Interests Card -->
-                    <article class="glass-card glass-card--interests">
-                        <div class="glass-card__icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="glass-card__title">Beyond Code</h3>
-                        <p class="glass-card__text">
-                            When I'm not building AI products, you'll find me diving into
-                            <span class="highlight">finance and investing</span>,
-                            seeking wisdom from the <span class="highlight">Bhagavad Gita</span>,
-                            and exploring <span class="highlight">self-improvement</span> literature.
-                            These diverse interests fuel my perspective on problem-solving.
-                        </p>
-                    </article>
-
-                    <!-- Stats Card -->
-                    <article class="glass-card glass-card--stats">
-                        <div class="stats-grid">
-                            <div class="stat">
-                                <span class="stat__number" data-count="4">0</span>
-                                <span class="stat__label">Live Projects</span>
+                    </div>
+                </section>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-7 flex flex-col gap-6">
+                        <div class="technical-border bg-panel-bg p-1">
+                            <div class="bg-black/40 p-6 h-full">
+                                <h3
+                                    class="text-sm font-bold uppercase tracking-widest mb-6 flex items-center justify-between text-muted border-b border-border-color pb-2">
+                                    <span>Resource Allocation Protocol</span>
+                                    <span class="material-icons text-sm">view_timeline</span>
+                                </h3>
+                                <div class="grid grid-cols-2 gap-px bg-border-color border border-border-color">
+                                    <div
+                                        class="bg-panel-bg p-4 border-b border-primary/30 relative overflow-hidden group">
+                                        <div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+                                        <h4 class="font-display font-bold text-lg text-white mb-1">I HANDLE</h4>
+                                        <p class="text-xs text-primary font-mono">// HUMAN_SIDE (STRATEGY)</p>
+                                    </div>
+                                    <div class="bg-panel-bg p-4 border-b border-white/10 relative group">
+                                        <div class="absolute top-0 left-0 w-full h-1 bg-white/20"></div>
+                                        <h4 class="font-display font-bold text-lg text-white mb-1">AI HANDLES</h4>
+                                        <p class="text-xs text-muted font-mono">// MACHINE_SIDE (EXECUTION)</p>
+                                    </div>
+                                    <div class="bg-dark-bg/50 p-6 space-y-4">
+                                        <ul class="space-y-4">
+                                            <li class="flex items-start gap-3 group">
+                                                <span
+                                                    class="material-icons text-primary text-sm mt-0.5 group-hover:scale-110 transition-transform">psychology</span>
+                                                <div>
+                                                    <span class="block text-sm font-bold text-white">Strategy &
+                                                        Logic</span>
+                                                    <span class="text-[10px] text-muted uppercase tracking-wider">Core
+                                                        Processing</span>
+                                                </div>
+                                            </li>
+                                            <li class="flex items-start gap-3 group">
+                                                <span
+                                                    class="material-icons text-primary text-sm mt-0.5 group-hover:scale-110 transition-transform">architecture</span>
+                                                <div>
+                                                    <span class="block text-sm font-bold text-white">Architecture
+                                                        Design</span>
+                                                    <span
+                                                        class="text-[10px] text-muted uppercase tracking-wider">Structural
+                                                        Integrity</span>
+                                                </div>
+                                            </li>
+                                            <li class="flex items-start gap-3 group">
+                                                <span
+                                                    class="material-icons text-primary text-sm mt-0.5 group-hover:scale-110 transition-transform">track_changes</span>
+                                                <div>
+                                                    <span class="block text-sm font-bold text-white">Problem
+                                                        Definition</span>
+                                                    <span class="text-[10px] text-muted uppercase tracking-wider">Scope
+                                                        Analysis</span>
+                                                </div>
+                                            </li>
+                                            <li class="flex items-start gap-3 group">
+                                                <span
+                                                    class="material-icons text-primary text-sm mt-0.5 group-hover:scale-110 transition-transform">lightbulb</span>
+                                                <div>
+                                                    <span class="block text-sm font-bold text-white">Creative
+                                                        Thinking</span>
+                                                    <span
+                                                        class="text-[10px] text-muted uppercase tracking-wider">Non-Linear
+                                                        Ops</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-dark-bg/50 p-6 space-y-4">
+                                        <ul class="space-y-4">
+                                            <li class="flex items-start gap-3 group">
+                                                <span
+                                                    class="material-icons text-white/60 text-sm mt-0.5 group-hover:text-white transition-colors">terminal</span>
+                                                <div>
+                                                    <span
+                                                        class="block text-sm font-bold text-white/80 group-hover:text-white">Code
+                                                        Generation</span>
+                                                    <span class="text-[10px] text-muted uppercase tracking-wider">Bulk
+                                                        Syntax</span>
+                                                </div>
+                                            </li>
+                                            <li class="flex items-start gap-3 group">
+                                                <span
+                                                    class="material-icons text-white/60 text-sm mt-0.5 group-hover:text-white transition-colors">palette</span>
+                                                <div>
+                                                    <span
+                                                        class="block text-sm font-bold text-white/80 group-hover:text-white">UI/UX
+                                                        Mockups</span>
+                                                    <span class="text-[10px] text-muted uppercase tracking-wider">Visual
+                                                        Rendering</span>
+                                                </div>
+                                            </li>
+                                            <li class="flex items-start gap-3 group">
+                                                <span
+                                                    class="material-icons text-white/60 text-sm mt-0.5 group-hover:text-white transition-colors">bolt</span>
+                                                <div>
+                                                    <span
+                                                        class="block text-sm font-bold text-white/80 group-hover:text-white">Implementation</span>
+                                                    <span class="text-[10px] text-muted uppercase tracking-wider">Rapid
+                                                        Deployment</span>
+                                                </div>
+                                            </li>
+                                            <li class="flex items-start gap-3 group">
+                                                <span
+                                                    class="material-icons text-white/60 text-sm mt-0.5 group-hover:text-white transition-colors">rocket_launch</span>
+                                                <div>
+                                                    <span
+                                                        class="block text-sm font-bold text-white/80 group-hover:text-white">Deployment</span>
+                                                    <span class="text-[10px] text-muted uppercase tracking-wider">Ship
+                                                        Cycle</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="stat">
-                                <span class="stat__number" data-count="10">0</span>
-                                <span class="stat__label">Technologies</span>
+                        </div>
+                        <div class="technical-border bg-panel-bg p-6">
+                            <h3
+                                class="text-sm font-bold uppercase tracking-widest mb-6 flex items-center justify-between text-muted border-b border-border-color pb-2">
+                                <span>System Competency Levels</span>
+                                <span class="material-icons text-sm">bar_chart</span>
+                            </h3>
+                            <div class="space-y-4 font-mono text-xs">
+                                <div class="flex items-center gap-4">
+                                    <span class="w-24 text-muted">Python</span>
+                                    <div
+                                        class="flex-grow h-6 bg-[#222] border border-border-color relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 h-full w-[85%] bg-white/20"></div>
+                                        <div class="absolute top-0 left-0 h-full w-[85%] border-r-2 border-primary"
+                                            style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 51, 51, 0.1) 2px, rgba(255, 51, 51, 0.1) 4px);">
+                                        </div>
+                                    </div>
+                                    <span class="w-10 text-right font-bold text-primary">85%</span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="w-24 text-muted">FastAPI</span>
+                                    <div
+                                        class="flex-grow h-6 bg-[#222] border border-border-color relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 h-full w-[78%] bg-white/20"></div>
+                                        <div class="absolute top-0 left-0 h-full w-[78%] border-r-2 border-primary"
+                                            style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 51, 51, 0.1) 2px, rgba(255, 51, 51, 0.1) 4px);">
+                                        </div>
+                                    </div>
+                                    <span class="w-10 text-right font-bold text-primary">78%</span>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <span class="w-24 text-muted">AI Systems</span>
+                                    <div
+                                        class="flex-grow h-6 bg-[#222] border border-border-color relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 h-full w-[92%] bg-white/20"></div>
+                                        <div class="absolute top-0 left-0 h-full w-[92%] border-r-2 border-primary glow-text shadow-[0_0_10px_rgba(255,51,51,0.2)]"
+                                            style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 51, 51, 0.2) 2px, rgba(255, 51, 51, 0.2) 4px);">
+                                        </div>
+                                    </div>
+                                    <span class="w-10 text-right font-bold text-primary">92%</span>
+                                </div>
                             </div>
-                            <div class="stat">
-                                <span class="stat__number" data-count="1000">0</span>
-                                <span class="stat__label">Lines of AI-Assisted Code</span>
+                            <div
+                                class="mt-4 pt-2 border-t border-border-color flex justify-between text-[10px] text-muted uppercase">
+                                <span>// Data Source: Live Performance</span>
+                                <span>[Bars Animate on Scroll]</span>
                             </div>
                         </div>
-                    </article>
+                    </div>
+                    <div class="lg:col-span-5 flex flex-col gap-6">
+                        <div class="technical-border bg-panel-bg p-6">
+                            <h3
+                                class="text-sm font-bold uppercase tracking-widest mb-4 text-muted border-b border-border-color pb-2">
+                                Core Modules
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
+                                <div class="group h-32 relative perspective-1000 cursor-pointer">
+                                    <div
+                                        class="relative w-full h-full transition-all duration-500 transform border border-border-color hover:border-primary bg-black/40 hover:bg-black/60 p-4 flex flex-col justify-between">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-display font-bold text-white text-lg">INTERESTS</h4>
+                                            <span class="material-icons text-primary">menu_book</span>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <p class="text-xs text-muted font-mono flex items-center gap-2">
+                                                <span class="w-1 h-1 bg-primary rounded-full"></span> Finance & Markets
+                                            </p>
+                                            <p class="text-xs text-muted font-mono flex items-center gap-2">
+                                                <span class="w-1 h-1 bg-primary rounded-full"></span> Philosophy
+                                            </p>
+                                            <p class="text-xs text-muted font-mono flex items-center gap-2">
+                                                <span class="w-1 h-1 bg-primary rounded-full"></span> Market Analysis
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <span class="material-icons text-xs text-primary">arrow_forward</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group h-32 relative perspective-1000 cursor-pointer">
+                                    <div
+                                        class="relative w-full h-full transition-all duration-500 transform border border-border-color hover:border-primary bg-black/40 hover:bg-black/60 p-4 flex flex-col justify-between">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-display font-bold text-white text-lg">APPROACH</h4>
+                                            <span class="material-icons text-primary">handshake</span>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <p class="text-xs text-muted font-mono flex items-center gap-2">
+                                                <span class="w-1 h-1 bg-primary rounded-full"></span> Identify Problem
+                                            </p>
+                                            <p class="text-xs text-muted font-mono flex items-center gap-2">
+                                                <span class="w-1 h-1 bg-primary rounded-full"></span> Ship Fast &
+                                                Iterate
+                                            </p>
+                                            <p class="text-xs text-muted font-mono flex items-center gap-2">
+                                                <span class="w-1 h-1 bg-primary rounded-full"></span> AI Code
+                                                Implementation
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <span class="material-icons text-xs text-primary">arrow_forward</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="group h-32 relative perspective-1000 cursor-pointer">
+                                    <div
+                                        class="relative w-full h-full transition-all duration-500 transform border border-border-color hover:border-primary bg-black/40 hover:bg-black/60 p-4 flex flex-col justify-between">
+                                        <div class="flex justify-between items-start">
+                                            <h4 class="font-display font-bold text-white text-lg">GOALS</h4>
+                                            <span class="material-icons text-primary">rocket_launch</span>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <p class="text-xs text-muted font-mono flex items-center gap-2">
+                                                <span class="w-1 h-1 bg-primary rounded-full"></span> Master Agentic AI
+                                            </p>
+                                            <p class="text-xs text-muted font-mono flex items-center gap-2">
+                                                <span class="w-1 h-1 bg-primary rounded-full"></span> Build Fintech for
+                                                India
+                                            </p>
+                                            <p class="text-xs text-muted font-mono flex items-center gap-2">
+                                                <span class="w-1 h-1 bg-primary rounded-full"></span> Ship 10+ Products
+                                            </p>
+                                        </div>
+                                        <div
+                                            class="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <span class="material-icons text-xs text-primary">arrow_forward</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="technical-border bg-panel-bg p-6 flex-grow flex flex-col">
+                            <h3
+                                class="text-sm font-bold uppercase tracking-widest mb-4 flex items-center justify-between text-muted border-b border-border-color pb-2">
+                                <span>Focus Areas</span>
+                                <span class="material-icons text-sm">radar</span>
+                            </h3>
+                            <div class="flex-grow flex items-center justify-center py-4 relative">
+                                <div
+                                    class="relative w-48 h-48 border border-white/10 rounded-full flex items-center justify-center">
+                                    <div class="absolute w-32 h-32 border border-white/10 rounded-full"></div>
+                                    <div class="absolute w-16 h-16 border border-white/10 rounded-full"></div>
+                                    <div class="absolute w-full h-[1px] bg-white/10"></div>
+                                    <div class="absolute h-full w-[1px] bg-white/10"></div>
+                                    <svg class="absolute inset-0 w-full h-full overflow-visible" viewBox="0 0 100 100">
+                                        <polygon class="filter drop-shadow-[0_0_5px_rgba(255,51,51,0.5)]"
+                                            fill="rgba(255, 51, 51, 0.1)" points="50,10 90,50 50,85 20,50"
+                                            stroke="#FF3333" stroke-width="1.5"></polygon>
+                                        <circle cx="50" cy="10" fill="white" r="2"></circle>
+                                        <circle cx="90" cy="50" fill="white" r="2"></circle>
+                                        <circle cx="50" cy="85" fill="white" r="2"></circle>
+                                        <circle cx="20" cy="50" fill="white" r="2"></circle>
+                                    </svg>
+                                    <div class="absolute top-[-20px] text-[10px] text-white font-mono bg-dark-bg px-1">
+                                        AI Systems (90)</div>
+                                    <div
+                                        class="absolute bottom-[-20px] text-[10px] text-white font-mono bg-dark-bg px-1">
+                                        RAG Systems (80)</div>
+                                    <div class="absolute left-[-50px] text-[10px] text-white font-mono bg-dark-bg px-1">
+                                        Fintech (85)</div>
+                                    <div
+                                        class="absolute right-[-60px] text-[10px] text-white font-mono bg-dark-bg px-1">
+                                        Multi-Agent (88)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <section class="technical-border bg-panel-bg p-2 mt-4 relative">
+                    <div
+                        class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-dark-bg px-4 py-1 border border-border-color text-primary text-xs font-bold uppercase tracking-widest z-10">
+                        Partnership Initiated
+                    </div>
+                    <div class="relative w-full aspect-[2.5/1] overflow-hidden bg-[#0a0a0a] group">
+                        <div class="w-full h-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-all duration-700 grayscale mix-blend-screen"
+                            data-alt="Minimalist black and white line art illustration showing a human hand shaking a robotic hand"
+                            style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB0cznWpzijsvbHxJsl-6jCOi6wZByprFaOcBQl1B7iUegarGZsy1VSwAtiwmS8fjuSJOVDHb7Uzo-6vQQZjqRi75A5LL0_rB1GXDwCKAG_p7xjK68VOfDb1ZnwhOiymeL2nV0aFE-cCVg5hnpYcGkjyFzlSJF-bysfrpIPnxCLPSSQ2gONsIF2VP2eAxm3hC5YlQmzt-u8emI32y_Jlvmuj-8Y1ZLwscopcCLR2hRujav1wf8SY4VdQyNDnkIjo6WFB5NU63ancDl0');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CjxwYXRoIGQ9Ik0wIDBoNDB2NDBIMHoiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDUxLCA1MSwgMC4wNSkiIHN0cm9rZS13aWR0aD0iMSIvPgo8L3N2Zz4=')] opacity-30 pointer-events-none">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-transparent opacity-80 pointer-events-none">
+                        </div>
+                        <div class="absolute bottom-6 left-0 right-0 text-center">
+                            <div class="inline-flex flex-col items-center gap-2">
+                                <span class="material-icons text-primary text-3xl animate-pulse">fingerprint</span>
+                                <div class="h-px w-24 bg-gradient-to-r from-transparent via-primary to-transparent">
+                                </div>
+                                <h2
+                                    class="text-2xl md:text-3xl font-display font-bold text-white uppercase tracking-[0.2em] mt-2">
+                                    Ship in Days, Not Months</h2>
+                                <p class="text-xs text-muted font-mono tracking-widest uppercase mt-1">
+                                    [ Collaboration Verified ]
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
 

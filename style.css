@@ -3134,3 +3134,66 @@ h6 {
     right: 0;
     border-width: 0 1px 1px 0;
 }
+
+/* ==========================================
+   ABOUT SECTION REVAMP (Human-AI Nexus)
+   ========================================== */
+
+/* Technical Border with Corner Accents */
+.technical-border {
+    border: 1px solid #333333;
+    /* border-color */
+    position: relative;
+}
+
+.technical-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #FF3333;
+    /* primary */
+    border-left: 2px solid #FF3333;
+    /* primary */
+    transform: translate(-1px, -1px);
+}
+
+.technical-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid #FF3333;
+    /* primary */
+    border-right: 2px solid #FF3333;
+    /* primary */
+    transform: translate(1px, 1px);
+}
+
+/* Scanline Effect */
+.scanline {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+}
+
+/* Glow Text */
+.glow-text {
+    text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
+}
+
+/* Ensure background grid pattern covers section */
+.section--about {
+    background-color: #0a0a0a !important;
+    /* dark-bg override */
+    background-image: linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px);
+    background-size: 40px 40px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+}
