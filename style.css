@@ -1383,6 +1383,107 @@ h6 {
         right: 1rem;
         bottom: 1rem;
     }
+
+    .hero-scroll-indicator {
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+/* ============================================
+   MOBILE AUDIO TOGGLE
+   Compact toggle for small screens
+   ============================================ */
+.mobile-audio-toggle {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin-right: 15px;
+    /* Spacing from hamburger */
+}
+
+.mobile-audio-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: white;
+    /* Default white on hero */
+    letter-spacing: 0.1em;
+}
+
+.mobile-toggle-switch {
+    width: 36px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.mobile-toggle-thumb {
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Playing State */
+.mobile-audio-toggle.playing .mobile-toggle-switch {
+    background: var(--primary);
+    /* Red when playing */
+}
+
+.mobile-audio-toggle.playing .mobile-toggle-switch .mobile-toggle-thumb {
+    background: white;
+    transform: translateX(16px);
+}
+
+/* Color switching when header is in menu (Red Text) */
+.header.menu-open .mobile-audio-label {
+    color: var(--primary);
+}
+
+.header.menu-open .mobile-toggle-switch {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.header.menu-open .mobile-audio-toggle.playing .mobile-toggle-switch {
+    background: var(--primary);
+}
+
+/* Media Query: Show on Mobile, Hide Desktop Widget */
+@media (max-width: 1024px) {
+    .audio-control {
+        display: none !important;
+    }
+
+    .mobile-audio-toggle {
+        display: flex;
+    }
+
+    /* Hero Fixes for Mobile */
+    .section--home,
+    .hero-container {
+        height: 100dvh;
+        /* Dynamic viewport height */
+        min-height: -webkit-fill-available;
+    }
+
+    /* Adjust Portrait to remove top space */
+    .hero-portrait {
+        height: 85vh;
+        /* Increased from 70vh */
+        bottom: 0;
+    }
+
+    .hero-portrait__image {
+        max-width: 95vw;
+        /* Slightly larger image */
+    }
 }
 
 /* ============================================

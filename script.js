@@ -754,6 +754,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (headerControl) headerControl.addEventListener('click', toggleAudio);
         if (navToggle) navToggle.addEventListener('click', toggleAudio);
 
+        // Mobile Toggle Logic
+        const mobileToggle = document.getElementById('mobile-audio-toggle');
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', toggleAudio);
+        }
+
+        // Update UI Helper (Extended for Mobile)
+        function updateUI(isPlaying) {
+            if (headerControl) headerControl.classList.toggle('playing', isPlaying);
+            if (navToggle) navToggle.classList.toggle('playing', isPlaying);
+            if (mobileToggle) mobileToggle.classList.toggle('playing', isPlaying);
+        }
+
         // Save state before leaving page (for seamless transition)
         window.addEventListener('beforeunload', () => {
             sessionStorage.setItem('audio_currentTime', audio.currentTime);
