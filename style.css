@@ -1556,38 +1556,103 @@ h6 {
 
 /* ============================================
    11. PROJECTS SECTION
-   White background with red text
+   Dark background with dot grid pattern
    ============================================ */
 /* ============================================
    11. WARDROBE PROJECTS SECTION (REVAMP)
-   Interactive closet concept - Technical 3D Look
+   Interactive closet concept - Dark Premium Look
    ============================================ */
 .section--wardrobe {
     height: 100vh;
     min-height: 800px;
     width: 100%;
     position: relative;
-    background: #FFFFFF;
-    /* White Background as requested */
+    background: #030303;
     overflow: hidden;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: auto;
-    /* Allow interaction */
 }
 
-/* --- DOORS (Initial Overlay) --- */
-.wardrobe-doors {
+/* Dot Grid Background */
+.wardrobe-bg {
     position: absolute;
     inset: 0;
+    z-index: 1;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+}
+
+/* --- WARDROBE TITLE HEADER --- */
+.wardrobe-header {
+    position: absolute;
+    top: 2rem;
+    left: 2.5rem;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wardrobe-header__badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #E63946;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.wardrobe-header__title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    margin: 0;
+}
+
+.wardrobe-header__slashes {
+    color: #E63946;
+    margin-right: 0.3em;
+}
+
+.wardrobe-header__subtitle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.wardrobe-header__line {
+    width: 60px;
+    height: 3px;
+    background: #E63946;
+}
+
+/* --- DOORS (Centered Container) --- */
+.wardrobe-doors {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 50;
     display: flex;
     width: 100%;
-    height: 100%;
+    max-width: 700px;
+    height: 70vh;
+    max-height: 600px;
     pointer-events: none;
-    /* Pointer events handled by JS/Animation state */
+    overflow: hidden;
 }
 
 .wardrobe-door {
@@ -1598,107 +1663,260 @@ h6 {
     align-items: center;
     transform-style: preserve-3d;
     will-change: transform;
-    background-color: #0A0A0A;
-    /* Deep Black Base */
+    background-color: #1A1A1A;
 }
 
 .wardrobe-door--left {
-    background: #111111;
-    /* Technical Black */
-    border-right: 2px solid rgba(255, 255, 255, 0.05);
+    background: #1A1A1A;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
     transform-origin: left center;
 }
 
 .wardrobe-door--right {
-    background: #C42B30;
-    /* GSMS Red Accent for Right Door */
-    border-left: 2px solid rgba(0, 0, 0, 0.2);
+    background: #1A1A1A;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
     transform-origin: right center;
 }
 
-/* Technical Texture: White Lines & L-Shapes */
+/* Technical Texture: Subtle Grid */
 .wardrobe-door__texture {
     position: absolute;
     inset: 0;
-    opacity: 0.3;
+    opacity: 0.15;
     pointer-events: none;
-    /* Grid Pattern */
     background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
+    background-size: 40px 40px;
 }
 
-/* L-Shape Accents at Corners */
-.wardrobe-door__texture::before {
-    content: '';
+/* Corner L-Bracket Accents */
+.wardrobe-door__corner {
     position: absolute;
-    top: 50px;
-    left: 50px;
-    width: 40px;
-    height: 40px;
-    border-top: 3px solid rgba(255, 255, 255, 0.6);
-    border-left: 3px solid rgba(255, 255, 255, 0.6);
+    width: 30px;
+    height: 30px;
+    z-index: 5;
 }
 
-.wardrobe-door__texture::after {
-    content: '';
-    position: absolute;
-    bottom: 50px;
-    right: 50px;
-    width: 40px;
-    height: 40px;
-    border-bottom: 3px solid rgba(255, 255, 255, 0.6);
-    border-right: 3px solid rgba(255, 255, 255, 0.6);
+.wardrobe-door__corner--tl {
+    top: 20px;
+    left: 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.5);
+    border-left: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-/* Handles */
+.wardrobe-door__corner--tr {
+    top: 20px;
+    right: 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.5);
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.wardrobe-door__corner--bl {
+    bottom: 20px;
+    left: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    border-left: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.wardrobe-door__corner--br {
+    bottom: 20px;
+    right: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Handles - Vertical Red Bars */
 .wardrobe-door__handle {
-    width: 10px;
-    height: 140px;
-    background: #F6383F;
-    /* Red Handles */
+    width: 6px;
+    height: 100px;
+    background: #E63946;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    box-shadow:
-        inset 1px 1px 0 rgba(255, 255, 255, 0.4),
-        0 10px 20px rgba(0, 0, 0, 0.5);
-    border-radius: 4px;
+    border-radius: 3px;
     z-index: 10;
 }
 
 .wardrobe-door--left .wardrobe-door__handle {
-    right: 30px;
+    right: 20px;
 }
 
 .wardrobe-door--right .wardrobe-door__handle {
-    left: 30px;
-    background: #111;
-    /* Contrast handle on red door */
+    left: 20px;
 }
 
+/* --- CATALOG ID (Bottom Left) --- */
+.catalog-id {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 2.5rem;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(30, 30, 30, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 160px;
+}
+
+.catalog-id__label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.catalog-id__value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #E63946;
+    letter-spacing: 0.1em;
+}
+
+.catalog-id__bar {
+    width: 60%;
+    height: 3px;
+    background: #E63946;
+    margin-top: 0.5rem;
+}
+
+/* --- CURRENT SELECTION CARD (Bottom Right) --- */
+.current-selection {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    z-index: 60;
+    width: 320px;
+    max-width: calc(100vw - 3rem);
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(30, 30, 30, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.current-selection__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.current-selection__label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #E63946;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.current-selection__icon {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.current-selection__icon:hover {
+    border-color: #E63946;
+    color: #E63946;
+}
+
+.current-selection__icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+.current-selection__title {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.current-selection__desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.current-selection__btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: #FFFFFF;
+    color: #030303;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+.current-selection__btn:hover {
+    background: #E63946;
+    color: #FFFFFF;
+}
+
+.current-selection__btn svg {
+    transition: transform 0.3s ease;
+}
+
+.current-selection__btn:hover svg {
+    transform: translateX(4px);
+}
 
 /* --- INTERIOR CONTENT --- */
 .wardrobe-content {
-    position: relative;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
-    height: 100%;
-    max-width: none;
-    /* Full Width */
+    max-width: 700px;
+    height: 70vh;
+    max-height: 600px;
+    z-index: 5;
     display: flex;
     flex-direction: column;
-    padding: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
 }
 
 /* --- RACK SYSTEM --- */
 .wardrobe-rack {
     position: relative;
     width: 100%;
-    height: 45%;
+    height: auto;
     z-index: 10;
-    padding-top: 60px;
-    /* Space from top */
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1709,11 +1927,10 @@ h6 {
     height: 60px;
     overflow: visible;
     position: absolute;
-    top: 50px;
+    top: 20px;
     left: 0;
-    stroke: #1E1E1C;
-    /* Black Wire */
-    stroke-width: 5px;
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 3px;
     stroke-linecap: round;
     fill: none;
     z-index: 1;
@@ -2063,22 +2280,45 @@ h6 {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+
+    /* Simplify doors for mobile */
     .wardrobe-doors {
-        display: none;
+        max-width: 90%;
+        height: 50vh;
+        max-height: 400px;
     }
 
-    /* Simplify for mobile, just show rack */
     .section--wardrobe {
-        background: #fff;
+        background: #030303;
         height: auto;
         min-height: 100vh;
         padding: 4rem 0;
     }
 
+    /* Header responsive */
+    .wardrobe-header {
+        top: 1rem;
+        left: 1rem;
+    }
+
+    .wardrobe-header__title {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    .wardrobe-header__subtitle {
+        font-size: 0.6rem;
+    }
+
+    /* Content responsive */
+    .wardrobe-content {
+        max-width: 90%;
+        height: 50vh;
+        max-height: 400px;
+    }
+
     .wardrobe-rack {
         height: auto;
-        padding-top: 0;
-        margin-bottom: 2rem;
+        padding-top: 20px;
     }
 
     .rack-items {
@@ -2093,6 +2333,34 @@ h6 {
         flex-shrink: 0;
     }
 
+    /* T-shirt sizing for mobile */
+    .t-shirt {
+        width: 80px;
+        height: 120px;
+    }
+
+    /* Catalog ID responsive */
+    .catalog-id {
+        bottom: 1rem;
+        left: 1rem;
+        padding: 0.75rem 1rem;
+        min-width: 120px;
+    }
+
+    /* Current Selection responsive */
+    .current-selection {
+        bottom: 1rem;
+        right: 1rem;
+        width: 280px;
+        max-width: calc(100vw - 2rem);
+        padding: 1rem;
+    }
+
+    .current-selection__title {
+        font-size: 1.4rem;
+    }
+
+    /* Project preview responsive */
     .project-preview {
         flex-direction: column-reverse;
         width: 100%;
@@ -2119,6 +2387,28 @@ h6 {
         justify-content: center;
     }
 }
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .wardrobe-header__badge {
+        display: none;
+    }
+
+    .catalog-id,
+    .current-selection {
+        position: fixed;
+    }
+
+    .current-selection {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+    }
+}
+
 /* ============================================
    12. CONTACT SECTION - REDESIGNED
    Dark banner, red main section with marquee
@@ -2803,4 +3093,44 @@ h6 {
 }
 
 /* Tailwind Detail View Helpers */
-.corner-accent { position: absolute; width: 20px; height: 20px; border-color: #ffffff; border-style: solid; pointer-events: none; opacity: 0.3; } .dark .corner-accent { border-color: #ffffff; } .light .corner-accent { border-color: #000000; } .corner-tl { top: 0; left: 0; border-width: 1px 0 0 1px; } .corner-tr { top: 0; right: 0; border-width: 1px 1px 0 0; } .corner-bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; } .corner-br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+.corner-accent {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: #ffffff;
+    border-style: solid;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.dark .corner-accent {
+    border-color: #ffffff;
+}
+
+.light .corner-accent {
+    border-color: #000000;
+}
+
+.corner-tl {
+    top: 0;
+    left: 0;
+    border-width: 1px 0 0 1px;
+}
+
+.corner-tr {
+    top: 0;
+    right: 0;
+    border-width: 1px 1px 0 0;
+}
+
+.corner-bl {
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 1px 1px;
+}
+
+.corner-br {
+    bottom: 0;
+    right: 0;
+    border-width: 0 1px 1px 0;
+}

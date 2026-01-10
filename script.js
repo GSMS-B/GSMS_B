@@ -824,7 +824,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const preview = document.querySelector('.project-preview');
         const rack = document.querySelector('.wardrobe-rack');
 
-        // UI Elements
+        // UI Elements - High Fidelity Preview
         const ui = {
             titleStart: document.getElementById('project-title-start'),
             titleEnd: document.getElementById('project-title-end'),
@@ -839,13 +839,29 @@ document.addEventListener('DOMContentLoaded', () => {
             index: document.getElementById('project-index')
         };
 
-        if (!section || !rackItems.length || !preview) return;
+        // UI Elements - Current Selection Card
+        const selectionCard = {
+            container: document.getElementById('current-selection'),
+            title: document.getElementById('selection-title'),
+            desc: document.getElementById('selection-desc'),
+            btn: document.getElementById('selection-btn'),
+            closeBtn: document.querySelector('.current-selection__icon')
+        };
+
+        // UI Elements - Catalog ID
+        const catalogId = {
+            value: document.getElementById('catalog-id-value')
+        };
+
+        if (!section || !rackItems.length) return;
 
         // Project Data
         const projects = {
             'contrasignal': {
                 titleStart: 'Contra', titleEnd: 'Signal',
+                name: 'CONTRA SIGNAL',
                 tagline: '// Market Sentiment Analysis Engine',
+                shortDesc: 'AI multi-agent system for stock analysis that delivers insights in 60 seconds. Autonomously scrapes global news to identify overreactions.',
                 desc: `<p>"When negative news breaks, stock prices crash. But is it a disaster or a discount?"</p>
                        <p class="mt-4">AI multi-agent system for stock analysis that delivers insights in 60 seconds. Autonomously scrapes global news to identify overreactions in real-time.</p>`,
                 tech: ['Python', 'FastAPI', 'Google Gemini', 'LangChain', 'ChromaDB'],
@@ -856,7 +872,9 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             'projectqr': {
                 titleStart: 'Project', titleEnd: 'QR',
+                name: 'PROJECT QR',
                 tagline: '// Dynamic QR Code Management',
+                shortDesc: 'Dynamic QR code management platform with real-time scanning analytics, geolocation tracking, and expiration management.',
                 desc: `<p>Static QR codes are dead. ProjectQR introduces a dynamic layer, allowing you to change destination URLs instantly without reprinting.</p>
                        <p class="mt-4">Dynamic QR code management platform with real-time scanning analytics, geolocation tracking, and expiration management.</p>`,
                 tech: ['FastAPI', 'PostgreSQL', 'JavaScript', 'Chart.js'],
@@ -867,7 +885,9 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             'quantumleap': {
                 titleStart: 'Quantum', titleEnd: 'Leap',
+                name: 'QUANTUM LEAP',
                 tagline: '// Quantum-Inspired Portfolio Optimizer',
+                shortDesc: 'Portfolio optimizer utilizing quantum algorithms to maximize Sharpe ratios and minimize risk across complex asset baskets.',
                 desc: `<p>Traditional optimization hits limits. QuantumLeap breaks them using the QAOA algorithm for superior asset allocation.</p>
                        <p class="mt-4">Portfolio optimizer utilizing quantum algorithms to maximize Sharpe ratios and minimize risk across complex asset baskets.</p>`,
                 tech: ['Python', 'Quantum Algorithms (QAOA)', 'Financial APIs'],
@@ -878,7 +898,9 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             'hush': {
                 titleStart: 'Hush', titleEnd: '.io',
+                name: 'HUSH .IO',
                 tagline: '// Zero-Knowledge Messaging',
+                shortDesc: 'Private ephemeral messaging app ensuring complete anonymity with zero database storage. No logs, no trace.',
                 desc: `<p>Privacy is not a feature, it's the foundation. Hush.io ensures your messages are encrypted in transit and deleted on receipt.</p>
                        <p class="mt-4">Private ephemeral messaging app ensuring complete anonymity with zero database storage. No logs, no trace.</p>`,
                 tech: ['WebSockets', 'E2E Encryption', 'Zero-storage Architecture'],
@@ -889,9 +911,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // ScrollTrigger
+        // ScrollTrigger for Door Animation
         if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             gsap.registerPlugin(ScrollTrigger);
+
+            // Get door elements for width calculation
+            const leftDoor = document.querySelector('.wardrobe-door--left');
+            const rightDoor = document.querySelector('.wardrobe-door--right');
+
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: section,
@@ -902,8 +929,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     anticipatePin: 1
                 }
             });
-            tl.to('.wardrobe-door--left', { xPercent: -100, ease: "none", duration: 2 })
-                .to('.wardrobe-door--right', { xPercent: 100, ease: "none", duration: 2 }, "<")
+
+            // Animate doors using x with function to get actual width
+            tl.to('.wardrobe-door--left', {
+                x: () => leftDoor ? -leftDoor.offsetWidth : -350,
+                ease: "none",
+                duration: 2
+            })
+                .to('.wardrobe-door--right', {
+                    x: () => rightDoor ? rightDoor.offsetWidth : 350,
+                    ease: "none",
+                    duration: 2
+                }, "<")
                 .fromTo(rack, { scale: 0.95, opacity: 0 }, { scale: 1, opacity: 1, duration: 1 }, "-=1");
         }
 
@@ -911,35 +948,88 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectKeys = Object.keys(projects);
         let currentIndex = 0;
 
-        // Interaction
+        // T-Shirt Click: Show Current Selection Card
         rackItems.forEach((item, idx) => {
             item.addEventListener('click', () => {
-                openProject(idx);
+                selectProject(idx);
             });
         });
 
-        function openProject(index) {
+        // Select Project (show card, don't open full preview)
+        function selectProject(index) {
             currentIndex = index;
             const pid = projectKeys[index];
             const data = projects[pid];
             if (!data) return;
 
-            // 1. Lock Body & HTML Scroll (Fixes "double scrollbar" & "wardrobe interaction")
+            // Update Catalog ID
+            if (catalogId.value) {
+                catalogId.value.textContent = `#00${index + 1}-C0`;
+            }
+
+            // Update Current Selection Card
+            if (selectionCard.container) {
+                if (selectionCard.title) selectionCard.title.textContent = data.name;
+                if (selectionCard.desc) selectionCard.desc.textContent = data.shortDesc;
+                if (selectionCard.btn) selectionCard.btn.href = data.live;
+
+                // Show card with animation
+                selectionCard.container.style.display = 'flex';
+                gsap.fromTo(selectionCard.container,
+                    { opacity: 0, y: 20 },
+                    { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }
+                );
+            }
+
+            // Store current project for VIEW PROJECT CASE button
+            if (selectionCard.btn) {
+                selectionCard.btn.onclick = (e) => {
+                    e.preventDefault();
+                    openFullPreview(index);
+                };
+            }
+        }
+
+        // VIEW PROJECT CASE: Open Full Preview
+        function openFullPreview(index) {
+            if (!preview) return;
+
+            // Update current index for navigation
+            currentIndex = index;
+
+            const pid = projectKeys[index];
+            const data = projects[pid];
+            if (!data) return;
+
+            // 1. Lock Body & HTML Scroll
             document.body.style.overflow = 'hidden';
             document.documentElement.style.overflow = 'hidden';
 
-            // 2. Hide Global Header (Fixes "Back button unclickable" & "Remove GSMS-B")
+            // 2. Hide Global Header
             const header = document.getElementById('header');
             if (header) header.style.display = 'none';
 
-            // 3. Hide Rack (Visual only, behind modal)
-            gsap.to(rack, { opacity: 0, y: -50, duration: 0.5, pointerEvents: 'none' });
+            // 3. Hide ALL wardrobe UI elements for full-screen preview
+            const wardrobeHeader = document.querySelector('.wardrobe-header');
+            const catalogIdEl = document.getElementById('catalog-id');
+            const wardrobeDoors = document.querySelector('.wardrobe-doors');
+            const wardrobeBg = document.querySelector('.wardrobe-bg');
 
-            // 3. Populate Data
+            if (wardrobeHeader) gsap.to(wardrobeHeader, { opacity: 0, duration: 0.3 });
+            if (catalogIdEl) gsap.to(catalogIdEl, { opacity: 0, duration: 0.3 });
+            if (wardrobeDoors) gsap.to(wardrobeDoors, { opacity: 0, duration: 0.3 });
+            if (wardrobeBg) gsap.to(wardrobeBg, { opacity: 0, duration: 0.3 });
+
+            gsap.to(rack, { opacity: 0, y: -50, duration: 0.5, pointerEvents: 'none' });
+            if (selectionCard.container) {
+                gsap.to(selectionCard.container, { opacity: 0, duration: 0.3 });
+            }
+
+            // 4. Populate Full Preview Data
             updateModalUI(data, index);
 
-            // 4. Reveal Preview
-            gsap.set(preview, { display: 'block', opacity: 0 }); // Ensure clean start
+            // 5. Reveal Preview with full-screen positioning
+            gsap.set(preview, { display: 'block', opacity: 0 });
             gsap.to(preview, {
                 opacity: 1, y: 0, duration: 0.5, ease: "power3.out",
                 pointerEvents: 'all'
@@ -983,19 +1073,48 @@ document.addEventListener('DOMContentLoaded', () => {
             const header = document.getElementById('header');
             if (header) header.style.display = ''; // Restore default (flex)
 
+            // Hide preview first
             gsap.to(preview, {
                 opacity: 0, y: 20, duration: 0.5, pointerEvents: 'none',
                 onComplete: () => { gsap.set(preview, { display: 'none' }); }
             });
+
+            // Restore ALL wardrobe UI elements
+            const wardrobeHeader = document.querySelector('.wardrobe-header');
+            const catalogIdEl = document.getElementById('catalog-id');
+            const wardrobeDoors = document.querySelector('.wardrobe-doors');
+            const wardrobeBg = document.querySelector('.wardrobe-bg');
+
+            if (wardrobeHeader) gsap.to(wardrobeHeader, { opacity: 1, duration: 0.5, delay: 0.3 });
+            if (catalogIdEl) gsap.to(catalogIdEl, { opacity: 1, duration: 0.5, delay: 0.3 });
+            if (wardrobeDoors) gsap.to(wardrobeDoors, { opacity: 1, duration: 0.5, delay: 0.3 });
+            if (wardrobeBg) gsap.to(wardrobeBg, { opacity: 1, duration: 0.5, delay: 0.3 });
+
             gsap.to(rack, { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power3.out", pointerEvents: 'all' });
+
+            // Show selection card again
+            if (selectionCard.container) {
+                selectionCard.container.style.display = 'flex';
+                gsap.to(selectionCard.container, { opacity: 1, y: 0, duration: 0.5, delay: 0.5 });
+            }
         }
 
-        // Back Button
+        // Back Button (from full preview)
         if (ui.backBtn) {
             ui.backBtn.addEventListener('click', closePreview);
         }
 
-        // Navigation Logic
+        // Close Button (on Current Selection card)
+        if (selectionCard.closeBtn) {
+            selectionCard.closeBtn.addEventListener('click', () => {
+                gsap.to(selectionCard.container, {
+                    opacity: 0, y: 20, duration: 0.3,
+                    onComplete: () => { selectionCard.container.style.display = 'none'; }
+                });
+            });
+        }
+
+        // Navigation Logic (within full preview)
         const btnPrev = document.getElementById('btn-prev-project');
         const btnNext = document.getElementById('btn-next-project');
 
@@ -1003,7 +1122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnPrev.addEventListener('click', () => {
                 let newIndex = currentIndex - 1;
                 if (newIndex < 0) newIndex = projectKeys.length - 1; // Loop
-                openProject(newIndex);
+                openFullPreview(newIndex);
             });
         }
 
@@ -1011,7 +1130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnNext.addEventListener('click', () => {
                 let newIndex = currentIndex + 1;
                 if (newIndex >= projectKeys.length) newIndex = 0; // Loop
-                openProject(newIndex);
+                openFullPreview(newIndex);
             });
         }
     }
