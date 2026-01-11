@@ -50,46 +50,31 @@ document.addEventListener('DOMContentLoaded', () => {
         contact: document.getElementById('contact'),
 
         // Hero
-        heroBgLetters: document.querySelectorAll('.hero__bg-letter'),
-        heroImage: document.querySelector('.hero__image'),
-        heroNameParts: document.querySelectorAll('.hero__name-part'),
-        taglineWords: document.querySelectorAll('.tagline-word'),
+        heroBgLetters: document.querySelectorAll('.hero-vertical-text span'),
+        heroImage: document.querySelector('.hero-portrait__image'),
+        // heroNameParts and taglineWords removed (using Marquee instead)
 
         // About
-        glassCards: document.querySelectorAll('.glass-card'),
-        techBadges: document.querySelectorAll('.tech-badge'),
+        glassCards: document.querySelectorAll('.technical-border'),
+        // techBadges removed as element no longer exists
         statNumbers: document.querySelectorAll('.stat__number'),
-        titleLetters: document.querySelectorAll('.title-letter'),
+        titleLetters: document.querySelectorAll('.section-title'), // Updated to generic title if needed, or leave empty safe check
 
-        // Projects
-        carousel: document.getElementById('carousel'),
-        projectCards: document.querySelectorAll('.project-card'),
-        carouselPrev: document.getElementById('carousel-prev'),
-        carouselNext: document.getElementById('carousel-next'),
-        carouselDots: document.querySelectorAll('.carousel-dot'),
-        monitor: document.getElementById('monitor'),
-        monitorIframe: document.getElementById('monitor-iframe'),
-        monitorPlaceholder: document.querySelector('.monitor__placeholder'),
 
         // Contact
-        contactWords: document.querySelectorAll('.contact-word'),
-        socialLinks: document.querySelectorAll('.social-link'),
+        contactWords: document.querySelectorAll('.contact-content__line'),
+        socialLinks: document.querySelectorAll('.contact-social__link'),
 
         // Audio
         audioToggle: document.getElementById('audio-toggle'),
         ambientAudio: document.getElementById('ambient-audio'),
 
-        // Particles
-        particlesHome: document.getElementById('particles-home'),
-        particlesContact: document.getElementById('particles-contact'),
     };
 
     // State management
     const state = {
         isMenuOpen: false,
         isAudioPlaying: false,
-        currentProject: 0,
-        totalProjects: DOM.projectCards.length,
         mouseX: 0,
         mouseY: 0,
     };
@@ -174,15 +159,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Handle all anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
-                e.preventDefault();
                 const targetId = anchor.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+                if (!targetId || targetId === '#' || !targetId.startsWith('#')) return;
 
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                e.preventDefault();
+                try {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                } catch (err) {
+                    console.warn('Smooth scroll failed for:', targetId);
                 }
             });
         });
@@ -224,27 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 1
         });
 
-        // Animate section titles on scroll
-        DOM.sections.forEach(section => {
-            const titleLetters = section.querySelectorAll('.title-letter');
-
-            if (titleLetters.length > 0) {
-                gsap.fromTo(titleLetters,
-                    { y: 50, opacity: 0 },
-                    {
-                        y: 0,
-                        opacity: 1,
-                        stagger: 0.05,
-                        duration: 0.8,
-                        scrollTrigger: {
-                            trigger: section,
-                            start: 'top 80%',
-                            toggleActions: 'play none none reverse'
-                        }
-                    }
-                );
-            }
-        });
+        // Section title animation removed (using CSS/other effects)
 
         // About section - Glass cards animation
         gsap.fromTo(DOM.glassCards,
@@ -263,21 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         );
 
-        // Tech badges animation
-        gsap.fromTo(DOM.techBadges,
-            { scale: 0.8, opacity: 0 },
-            {
-                scale: 1,
-                opacity: 1,
-                stagger: 0.08,
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: '.glass-card--tech',
-                    start: 'top 70%',
-                    toggleActions: 'play none none reverse'
-                }
-            }
-        );
+
 
         // Contact section words animation
         gsap.fromTo(DOM.contactWords,
@@ -304,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 stagger: 0.15,
                 duration: 0.6,
                 scrollTrigger: {
-                    trigger: '.social-links',
+                    trigger: '.contact-social',
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 }
@@ -350,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.1 });
 
         // Observe all animated elements
-        document.querySelectorAll('.glass-card, .title-letter, .tech-badge').forEach(el => {
+        document.querySelectorAll('.technical-border').forEach(el => {
             observer.observe(el);
         });
     }
@@ -394,238 +350,17 @@ document.addEventListener('DOMContentLoaded', () => {
             '-=0.5'
         );
 
-        // Name parts
-        heroTimeline.fromTo(DOM.heroNameParts,
-            { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, stagger: 0.1, duration: 0.6 },
-            '-=0.5'
-        );
-
-        // Tagline words
-        heroTimeline.fromTo(DOM.taglineWords,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, stagger: 0.05, duration: 0.4 },
-            '-=0.3'
-        );
+        // Tagline words animation removed
 
         // Scroll indicator
-        heroTimeline.fromTo('.scroll-indicator',
+        heroTimeline.fromTo('.hero-scroll-indicator',
             { y: 20, opacity: 0 },
             { y: 0, opacity: 0.7, duration: 0.5 },
             '-=0.2'
         );
     }
 
-    /* ============================================
-       8. PROJECT CAROUSEL
-       Circular carousel with automatic rotation
-       ============================================ */
-    function initCarousel() {
-        if (!DOM.carousel || DOM.projectCards.length === 0) return;
 
-        // Set initial state
-        updateCarousel();
-
-        // Previous button
-        DOM.carouselPrev?.addEventListener('click', () => {
-            state.currentProject = (state.currentProject - 1 + state.totalProjects) % state.totalProjects;
-            updateCarousel();
-        });
-
-        // Next button
-        DOM.carouselNext?.addEventListener('click', () => {
-            state.currentProject = (state.currentProject + 1) % state.totalProjects;
-            updateCarousel();
-        });
-
-        // Dot navigation
-        DOM.carouselDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                state.currentProject = index;
-                updateCarousel();
-            });
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (!isElementInViewport(DOM.projects)) return;
-
-            if (e.key === 'ArrowLeft') {
-                state.currentProject = (state.currentProject - 1 + state.totalProjects) % state.totalProjects;
-                updateCarousel();
-            } else if (e.key === 'ArrowRight') {
-                state.currentProject = (state.currentProject + 1) % state.totalProjects;
-                updateCarousel();
-            }
-        });
-
-        // Project card click - update monitor
-        DOM.projectCards.forEach((card, index) => {
-            card.addEventListener('click', () => {
-                if (card.dataset.state === 'active') {
-                    const url = card.dataset.url;
-                    if (url) {
-                        window.open(url, '_blank', 'noopener');
-                    }
-                } else {
-                    state.currentProject = index;
-                    updateCarousel();
-                }
-            });
-
-            // Hover effect for monitor preview
-            card.addEventListener('mouseenter', () => {
-                updateMonitorPreview(card.dataset.url);
-            });
-        });
-    }
-
-    function updateCarousel() {
-        DOM.projectCards.forEach((card, index) => {
-            const diff = index - state.currentProject;
-            let cardState = 'hidden';
-
-            if (diff === 0) {
-                cardState = 'active';
-            } else if (diff === -1 || (state.currentProject === 0 && index === state.totalProjects - 1)) {
-                cardState = 'prev';
-            } else if (diff === 1 || (state.currentProject === state.totalProjects - 1 && index === 0)) {
-                cardState = 'next';
-            }
-
-            card.dataset.state = cardState;
-        });
-
-        // Update dots
-        DOM.carouselDots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === state.currentProject);
-        });
-
-        // Update monitor with active project
-        const activeCard = DOM.projectCards[state.currentProject];
-        if (activeCard) {
-            updateMonitorPreview(activeCard.dataset.url);
-        }
-    }
-
-    function updateMonitorPreview(url) {
-        if (!DOM.monitorIframe || !url) return;
-
-        // Show placeholder while loading
-        if (DOM.monitorPlaceholder) {
-            DOM.monitorPlaceholder.style.display = 'flex';
-        }
-        DOM.monitorIframe.classList.remove('loaded');
-
-        // Note: Due to X-Frame-Options, most sites won't load in iframe
-        // This is a known limitation. In production, use screenshots/videos instead.
-        DOM.monitorIframe.src = url;
-
-        DOM.monitorIframe.onload = () => {
-            if (DOM.monitorPlaceholder) {
-                DOM.monitorPlaceholder.style.display = 'none';
-            }
-            DOM.monitorIframe.classList.add('loaded');
-        };
-
-        DOM.monitorIframe.onerror = () => {
-            // Keep placeholder visible on error
-            if (DOM.monitorPlaceholder) {
-                DOM.monitorPlaceholder.querySelector('.monitor__placeholder-text').textContent = 'Preview unavailable';
-            }
-        };
-    }
-
-    /* ============================================
-       9. 3D MONITOR PARALLAX
-       Mouse-tracking parallax effect
-       ============================================ */
-    function initMonitorParallax() {
-        if (!DOM.monitor) return;
-
-        // Update monitor rotation based on mouse position
-        document.addEventListener('mousemove', (e) => {
-            if (!isElementInViewport(DOM.projects)) return;
-
-            const rect = DOM.monitor.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-
-            // Calculate rotation based on mouse distance from center
-            const rotateY = ((e.clientX - centerX) / window.innerWidth) * 15;
-            const rotateX = ((e.clientY - centerY) / window.innerHeight) * -10;
-
-            DOM.monitor.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-
-        // Reset on mouse leave
-        DOM.projects?.addEventListener('mouseleave', () => {
-            DOM.monitor.style.transform = 'rotateX(0deg) rotateY(0deg)';
-        });
-    }
-
-    /* ============================================
-       10. PARTICLE SYSTEM
-       Floating particles in sections
-       ============================================ */
-    function initParticles() {
-        createParticles(DOM.particlesHome, 20, 'secondary');
-        createParticles(DOM.particlesContact, 15, 'secondary');
-    }
-
-    function createParticles(container, count, colorScheme = 'primary') {
-        if (!container) return;
-
-        for (let i = 0; i < count; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-
-            // Random position
-            particle.style.left = `${Math.random() * 100}%`;
-            particle.style.top = `${Math.random() * 100}%`;
-
-            // Random size (2-6px)
-            const size = 2 + Math.random() * 4;
-            particle.style.width = `${size}px`;
-            particle.style.height = `${size}px`;
-
-            // Random animation properties
-            const duration = 15 + Math.random() * 20;
-            const delay = Math.random() * 10;
-            const tx = (Math.random() - 0.5) * 100;
-            const ty = -50 - Math.random() * 100;
-
-            particle.style.setProperty('--tx', `${tx}px`);
-            particle.style.setProperty('--ty', `${ty}px`);
-            particle.style.animation = `particleFloat ${duration}s ${delay}s ease-in-out infinite`;
-
-            container.appendChild(particle);
-        }
-    }
-
-    /* ============================================
-       11. AUDIO TOGGLE
-       Background ambient music control
-       ============================================ */
-    function initAudioToggle() {
-        if (!DOM.audioToggle || !DOM.ambientAudio) return;
-
-        DOM.audioToggle.addEventListener('click', () => {
-            state.isAudioPlaying = !state.isAudioPlaying;
-
-            DOM.audioToggle.classList.toggle('playing', state.isAudioPlaying);
-
-            if (state.isAudioPlaying) {
-                DOM.ambientAudio.play().catch(e => {
-                    console.log('Audio playback failed:', e);
-                    state.isAudioPlaying = false;
-                    DOM.audioToggle.classList.remove('playing');
-                });
-            } else {
-                DOM.ambientAudio.pause();
-            }
-        });
-    }
 
     /* ============================================
        12. COUNTER ANIMATION
@@ -1106,7 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initSmoothScroll();
         initGSAPAnimations();
         initWardrobeProjects();
-        initParticles();
+        // initCarousel, initParticles, initMonitorParallax removed as deprecated
         initAudioSystem(); // Unified audio system
         initCounters();
 
