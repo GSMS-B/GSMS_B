@@ -4,16 +4,14 @@
    Table of Contents:
    1. DOM Selectors & Constants
    2. Loading Screen
-   3. Custom Cursor
-   4. Navigation (Hamburger Menu)
-   5. Smooth Scroll
-   6. GSAP Animations & ScrollTrigger
-   7. Project Carousel
-   8. 3D Monitor Parallax
-   9. Particle System
-   10. Audio Toggle
-   11. Counter Animation
-   12. Initialization
+   3. Navigation (Hamburger Menu)
+   4. Smooth Scroll
+   5. GSAP Animations & ScrollTrigger
+   6. Entry Animations
+   7. Counter Animation
+   8. Audio System
+   9. Wardrobe Projects
+   10. Initialization
    ============================================ */
 
 // Wait for DOM to be ready
@@ -29,10 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loader: document.getElementById('loader'),
         loaderProgress: document.querySelector('.loader__progress'),
         loaderPercentage: document.querySelector('.loader__percentage'),
-
-        // Cursor
-        cursor: document.getElementById('cursor'),
-        cursorFollower: document.getElementById('cursor-follower'),
 
         // Navigation
         header: document.getElementById('header'),
@@ -113,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ============================================
-       4. NAVIGATION (Hamburger Menu)
+       3. NAVIGATION (Hamburger Menu)
        Full-screen overlay with letter animations
        ============================================ */
     function initNavigation() {
@@ -152,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================================
-       5. SMOOTH SCROLL
+       4. SMOOTH SCROLL
        Smooth scrolling for navigation links
        ============================================ */
     function initSmoothScroll() {
@@ -194,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================================
-       6. GSAP ANIMATIONS & SCROLLTRIGGER
+       5. GSAP ANIMATIONS & SCROLLTRIGGER
        Advanced scroll-based animations
        ============================================ */
     function initGSAPAnimations() {
@@ -312,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================================
-       7. ENTRY ANIMATIONS
+       6. ENTRY ANIMATIONS
        Initial animations when page loads
        ============================================ */
     function initEntryAnimations() {
@@ -323,13 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     letter.style.opacity = '1';
                     letter.style.transform = 'translateY(0)';
                 }, i * 100);
-            });
-
-            DOM.taglineWords.forEach((word, i) => {
-                setTimeout(() => {
-                    word.style.opacity = '1';
-                    word.style.transform = 'translateY(0)';
-                }, 500 + i * 100);
             });
             return;
         }
@@ -363,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ============================================
-       12. COUNTER ANIMATION
+       7. COUNTER ANIMATION
        Animated number counting for stats
        ============================================ */
     function initCounters() {
@@ -432,11 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================================
-       12b. AUDIO VIBE CONTROL
-       Control background music from header
-       ============================================ */
-    /* ============================================
-       12b. AUDIO SYSTEM (Vibe Control + Nav Toggle)
+       8. AUDIO SYSTEM (Vibe Control + Nav Toggle)
        Unified audio control with persistence
        ============================================ */
     function initAudioSystem() {
@@ -510,7 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================================
-       WARDROBE INTERACTION
+       9. WARDROBE INTERACTION
        Sliding doors, Rack reveal, High-Fidelity Preview
        ============================================ */
     function initWardrobeProjects() {
@@ -831,7 +814,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ============================================
-       13. INITIALIZATION
+       10. INITIALIZATION
        Start all modules
        ============================================ */
     function init() {

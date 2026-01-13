@@ -6,17 +6,16 @@
    2. Reset & Base Styles
    3. Typography System
    4. Loading Screen
-   5. Custom Cursor
-   6. Header & Navigation
-   7. Full-Screen Menu Overlay
-   8. Section Base Styles
-   9. Hero Section (HOME)
-   10. About Section
-   11. Projects Section
-   12. Contact Section
-   13. Decorative Elements
-   14. Animations & Keyframes
-   15. Responsive Breakpoints
+   5. Header & Navigation
+   6. Full-Screen Menu Overlay
+   7. Section Base Styles
+   8. Hero Section (HOME)
+   9. About Section
+   10. Projects Section
+   11. Contact Section
+   12. Decorative Elements
+   13. Animations & Keyframes
+   14. Responsive Breakpoints
    ============================================ */
 
 /* ============================================
@@ -391,7 +390,7 @@ h6 {
 }
 
 /* ============================================
-   6. HEADER & NAVIGATION
+   5. HEADER & NAVIGATION
    Fixed header with logo and hamburger
    ============================================ */
 .header {
@@ -616,7 +615,7 @@ h6 {
 }
 
 /* ============================================
-   7. FULL-SCREEN MENU OVERLAY - REDESIGNED
+   6. FULL-SCREEN MENU OVERLAY
    White background, black text, letter pop-up hover
    ============================================ */
 .nav-overlay {
@@ -1049,7 +1048,7 @@ h6 {
 }
 
 /* ============================================
-   8. SECTION BASE STYLES
+   7. SECTION BASE STYLES
    Common section layout and sizing
    ============================================ */
 .section {
@@ -1077,7 +1076,7 @@ h6 {
 }
 
 /* ============================================
-   9. HERO SECTION (HOME) - REDESIGNED
+   8. HERO SECTION (HOME)
    DEVELOPER text behind portrait, vertical GSMS-B
    ============================================ */
 
@@ -1383,11 +1382,6 @@ h6 {
         right: 1rem;
         bottom: 1rem;
     }
-
-    .hero-scroll-indicator {
-        right: 1rem;
-        bottom: 1rem;
-    }
 }
 
 /* ============================================
@@ -1487,7 +1481,7 @@ h6 {
 }
 
 /* ============================================
-   10. ABOUT SECTION
+   9. ABOUT SECTION
    White background with red text
    ============================================ */
 .section--about {
@@ -1636,11 +1630,7 @@ h6 {
 }
 
 /* ============================================
-   11. PROJECTS SECTION
-   Dark background with dot grid pattern
-   ============================================ */
-/* ============================================
-   11. WARDROBE PROJECTS SECTION (REVAMP)
+   10. WARDROBE PROJECTS SECTION (REVAMP)
    Interactive closet concept - Dark Premium Look
    ============================================ */
 .section--wardrobe {
@@ -2491,7 +2481,7 @@ h6 {
 }
 
 /* ============================================
-   12. CONTACT SECTION - REDESIGNED
+   11. CONTACT SECTION
    Dark banner, red main section with marquee
    FULL WIDTH - NO CONSTRAINTS
    ============================================ */
@@ -2835,7 +2825,7 @@ h6 {
 }
 
 /* ============================================
-   13. DECORATIVE ELEMENTS
+   12. DECORATIVE ELEMENTS
    Floating code symbols and particles
    ============================================ */
 .floating-elements {
@@ -2915,7 +2905,7 @@ h6 {
 }
 
 /* ============================================
-   14. ANIMATIONS & KEYFRAMES
+   13. ANIMATIONS & KEYFRAMES
    All animation definitions
    ============================================ */
 @keyframes letterBounce {
@@ -3006,7 +2996,7 @@ h6 {
 }
 
 /* ============================================
-   15. RESPONSIVE BREAKPOINTS
+   14. RESPONSIVE BREAKPOINTS
    Mobile and tablet adaptations
    ============================================ */
 
@@ -3152,8 +3142,6 @@ h6 {
 @media print {
 
     .loader,
-    .cursor,
-    .cursor-follower,
     .nav-overlay,
     .hamburger,
     .floating-elements,
